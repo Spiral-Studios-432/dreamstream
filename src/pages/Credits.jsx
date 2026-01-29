@@ -80,35 +80,35 @@ export default function Credits() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/30">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            <Sparkles className="w-4 h-4" /> No Ads - Ever!
+        <div className="text-center mb-6 sm:mb-8 lg:mb-10">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-amber-100 text-amber-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" /> No Ads - Ever!
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">Credits & Premium</h1>
-          <p className="text-slate-600">Earn credits for free or upgrade for unlimited features</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Credits & Premium</h1>
+          <p className="text-sm sm:text-base text-slate-600 px-4">Earn credits for free or upgrade for unlimited features</p>
         </div>
 
         {/* Current Balance */}
-        <Card className="border-0 shadow-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white mb-8">
-          <CardContent className="p-8">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <Card className="border-0 shadow-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white mb-6 sm:mb-8">
+          <CardContent className="p-5 sm:p-6 lg:p-8">
+            <div className="flex flex-col gap-4 sm:gap-6">
               <div>
-                <p className="text-indigo-100 mb-2">Your Balance</p>
-                <div className="flex items-baseline gap-3">
-                  <span className="text-5xl font-bold">{userCredits?.total_credits || 0}</span>
-                  <span className="text-xl text-indigo-200">credits</span>
+                <p className="text-indigo-100 mb-1 sm:mb-2 text-sm">Your Balance</p>
+                <div className="flex items-baseline gap-2 sm:gap-3">
+                  <span className="text-3xl sm:text-4xl lg:text-5xl font-bold">{userCredits?.total_credits || 0}</span>
+                  <span className="text-base sm:text-lg lg:text-xl text-indigo-200">credits</span>
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                  <p className="text-indigo-200 text-sm mb-1">Current Tier</p>
-                  <p className="font-semibold text-lg">{currentTier.name}</p>
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4">
+                  <p className="text-indigo-200 text-xs sm:text-sm mb-1">Current Tier</p>
+                  <p className="font-semibold text-base sm:text-lg">{currentTier.name}</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                  <p className="text-indigo-200 text-sm mb-1">Streak Bonus</p>
-                  <p className="font-semibold text-lg">{userCredits?.streak_days || 0} days 🔥</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4">
+                  <p className="text-indigo-200 text-xs sm:text-sm mb-1">Streak Bonus</p>
+                  <p className="font-semibold text-base sm:text-lg">{userCredits?.streak_days || 0} days 🔥</p>
                 </div>
               </div>
             </div>
@@ -116,11 +116,11 @@ export default function Credits() {
         </Card>
 
         {/* How to Earn Credits */}
-        <div className="mb-10">
-          <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-            <Zap className="w-5 h-5 text-amber-500" /> Ways to Earn Credits
+        <div className="mb-6 sm:mb-8 lg:mb-10">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-3 sm:mb-4 flex items-center gap-2 px-1">
+            <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" /> Ways to Earn Credits
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {earnMethods.map((method, i) => (
               <Card key={i} className="border-0 shadow-md hover:shadow-lg transition-shadow">
                 <CardContent className="p-5">
@@ -143,11 +143,11 @@ export default function Credits() {
         </div>
 
         {/* Tier Plans */}
-        <div className="mb-10">
-          <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-            <Crown className="w-5 h-5 text-purple-500" /> Choose Your Plan
+        <div className="mb-6 sm:mb-8 lg:mb-10">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-3 sm:mb-4 flex items-center gap-2 px-1">
+            <Crown className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" /> Choose Your Plan
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             {tiers.map((tier) => {
               const isCurrent = tier.value === (userCredits?.tier || 'free');
               return (

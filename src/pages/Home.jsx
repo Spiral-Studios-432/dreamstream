@@ -61,27 +61,27 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div className="flex flex-col gap-3 sm:gap-4 mb-6 sm:mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">
               Welcome back{user?.full_name ? `, ${user.full_name.split(' ')[0]}` : ''}!
             </h1>
-            <p className="text-slate-600 mt-1">Track your dreams and unlock your subconscious</p>
+            <p className="text-sm sm:text-base text-slate-600 mt-1">Track your dreams and unlock your subconscious</p>
           </div>
-          <div className="flex items-center gap-3">
-            <CreditBadge credits={userCredits?.total_credits} size="large" />
-            <Link to={createPageUrl('Dreams')}>
-              <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-200">
-                <Plus className="w-4 h-4 mr-2" /> Log Dream
+          <div className="flex items-center gap-2 sm:gap-3">
+            <CreditBadge credits={userCredits?.total_credits} size="default" />
+            <Link to={createPageUrl('Dreams')} className="flex-1 sm:flex-none">
+              <Button className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-200 text-sm sm:text-base">
+                <Plus className="w-4 h-4 mr-1.5 sm:mr-2" /> Log Dream
               </Button>
             </Link>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
           <StreakCard 
             streakDays={userCredits?.streak_days} 
             lastActivity={userCredits?.last_activity_date}
@@ -108,7 +108,7 @@ export default function Home() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Left Column - Recent Dreams */}
           <div className="lg:col-span-2">
             <RecentDreams dreams={dreams} />
@@ -123,23 +123,23 @@ export default function Home() {
             />
 
             {/* Quick Tips Card */}
-            <div className="mt-6 p-5 rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100">
+            <div className="mt-4 sm:mt-6 p-4 sm:p-5 rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100">
               <div className="flex items-center gap-2 mb-3">
-                <Sparkles className="w-5 h-5 text-amber-600" />
-                <h3 className="font-semibold text-slate-800">Pro Tips</h3>
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
+                <h3 className="font-semibold text-sm sm:text-base text-slate-800">Pro Tips</h3>
               </div>
-              <ul className="space-y-2 text-sm text-slate-600">
+              <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-amber-500">•</span>
-                  Log dreams immediately after waking for better recall
+                  <span className="text-amber-500 flex-shrink-0">•</span>
+                  <span>Log dreams immediately after waking for better recall</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-amber-500">•</span>
-                  Track your mood to find patterns in your dreams
+                  <span className="text-amber-500 flex-shrink-0">•</span>
+                  <span>Track your mood to find patterns in your dreams</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-amber-500">•</span>
-                  Use tags to organize and search your dreams later
+                  <span className="text-amber-500 flex-shrink-0">•</span>
+                  <span>Use tags to organize and search your dreams later</span>
                 </li>
               </ul>
             </div>

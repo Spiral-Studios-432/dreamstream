@@ -80,54 +80,54 @@ Provide a 2-3 paragraph interpretation focusing on:
   };
 
   return (
-    <Card className="border-0 shadow-2xl max-w-2xl mx-auto">
-      <CardHeader className="border-b bg-gradient-to-r from-indigo-50 to-purple-50">
+    <Card className="border-0 shadow-2xl max-w-2xl mx-auto max-h-[90vh] flex flex-col">
+      <CardHeader className="border-b bg-gradient-to-r from-indigo-50 to-purple-50 p-4 sm:p-6 flex-shrink-0">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl">
+          <CardTitle className="text-lg sm:text-xl">
             {editDream ? 'Edit Dream' : 'Log New Dream'}
           </CardTitle>
-          <Button variant="ghost" size="icon" onClick={onClose}>
-            <X className="w-5 h-5" />
+          <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 sm:h-10 sm:w-10">
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
         </div>
       </CardHeader>
-      <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <CardContent className="p-4 sm:p-6 overflow-y-auto flex-1">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
-              <label className="text-sm font-medium text-slate-700 mb-1.5 block">Dream Title</label>
+              <label className="text-xs sm:text-sm font-medium text-slate-700 mb-1.5 block">Dream Title</label>
               <Input
                 value={formData.title}
                 onChange={(e) => handleChange('title', e.target.value)}
                 placeholder="Give your dream a title..."
-                className="border-slate-200"
+                className="border-slate-200 text-sm sm:text-base"
                 required
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-slate-700 mb-1.5 block">Dream Date</label>
+              <label className="text-xs sm:text-sm font-medium text-slate-700 mb-1.5 block">Dream Date</label>
               <Input
                 type="date"
                 value={formData.dream_date}
                 onChange={(e) => handleChange('dream_date', e.target.value)}
-                className="border-slate-200"
+                className="border-slate-200 text-sm sm:text-base"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="text-sm font-medium text-slate-700 mb-1.5 block">Dream Description</label>
+            <label className="text-xs sm:text-sm font-medium text-slate-700 mb-1.5 block">Dream Description</label>
             <Textarea
               value={formData.content}
               onChange={(e) => handleChange('content', e.target.value)}
-              placeholder="Describe your dream in detail... Include colors, people, places, emotions, and any symbols you remember."
-              className="min-h-[150px] border-slate-200"
+              placeholder="Describe your dream in detail..."
+              className="min-h-[120px] sm:min-h-[150px] border-slate-200 text-sm sm:text-base"
               required
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
             <MoodSelector 
               value={formData.mood_before} 
               onChange={(v) => handleChange('mood_before', v)} 
@@ -140,11 +140,11 @@ Provide a 2-3 paragraph interpretation focusing on:
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="text-sm font-medium text-slate-700 mb-1.5 block">Dream Type</label>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            <div className="sm:col-span-3">
+              <label className="text-xs sm:text-sm font-medium text-slate-700 mb-1.5 block">Dream Type</label>
               <Select value={formData.dream_type} onValueChange={(v) => handleChange('dream_type', v)}>
-                <SelectTrigger className="border-slate-200">
+                <SelectTrigger className="border-slate-200 text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -156,16 +156,18 @@ Provide a 2-3 paragraph interpretation focusing on:
                 </SelectContent>
               </Select>
             </div>
-            <StarRating 
-              value={formData.clarity_rating} 
-              onChange={(v) => handleChange('clarity_rating', v)} 
-              label="Dream Clarity"
-            />
-            <StarRating 
-              value={formData.sleep_quality} 
-              onChange={(v) => handleChange('sleep_quality', v)} 
-              label="Sleep Quality"
-            />
+            <div className="sm:col-span-3 grid grid-cols-2 gap-4">
+              <StarRating 
+                value={formData.clarity_rating} 
+                onChange={(v) => handleChange('clarity_rating', v)} 
+                label="Dream Clarity"
+              />
+              <StarRating 
+                value={formData.sleep_quality} 
+                onChange={(v) => handleChange('sleep_quality', v)} 
+                label="Sleep Quality"
+              />
+            </div>
           </div>
 
           <div>
@@ -220,14 +222,14 @@ Provide a 2-3 paragraph interpretation focusing on:
             )}
           </div>
 
-          <div className="flex gap-3 pt-4">
-            <Button type="button" variant="outline" onClick={onClose} className="flex-1">
+          <div className="flex gap-2 sm:gap-3 pt-4">
+            <Button type="button" variant="outline" onClick={onClose} className="flex-1 text-sm sm:text-base">
               Cancel
             </Button>
             <Button 
               type="submit" 
               disabled={saving}
-              className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+              className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-sm sm:text-base"
             >
               {saving ? 'Saving...' : (editDream ? 'Update Dream' : 'Save Dream')}
             </Button>

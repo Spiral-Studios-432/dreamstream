@@ -88,28 +88,28 @@ export default function Dreams() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/30">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-          <div className="flex items-center gap-3">
-            <div className="p-3 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-lg shadow-indigo-200">
-              <Moon className="w-6 h-6 text-white" />
+        <div className="flex flex-col gap-3 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="p-2 sm:p-3 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-lg shadow-indigo-200">
+              <Moon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">Dream Journal</h1>
-              <p className="text-slate-600 text-sm">{dreams.length} dreams recorded</p>
+              <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Dream Journal</h1>
+              <p className="text-xs sm:text-sm text-slate-600">{dreams.length} dreams recorded</p>
             </div>
           </div>
           <Button 
             onClick={() => { setEditDream(null); setShowForm(true); }}
-            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-200"
+            className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-200 text-sm sm:text-base"
           >
-            <Plus className="w-4 h-4 mr-2" /> Log Dream
+            <Plus className="w-4 h-4 mr-1.5 sm:mr-2" /> Log Dream
           </Button>
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        <div className="flex flex-col gap-2 sm:gap-3 mb-4 sm:mb-6">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <Input
@@ -128,7 +128,7 @@ export default function Dreams() {
             )}
           </div>
           <Select value={filterType} onValueChange={setFilterType}>
-            <SelectTrigger className="w-full sm:w-[180px] border-slate-200 bg-white">
+            <SelectTrigger className="w-full sm:w-[180px] border-slate-200 bg-white text-sm">
               <Filter className="w-4 h-4 mr-2 text-slate-400" />
               <SelectValue placeholder="Filter by type" />
             </SelectTrigger>
@@ -159,7 +159,7 @@ export default function Dreams() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="w-full max-w-2xl my-8"
+                className="w-full max-w-2xl my-4 sm:my-8"
               >
                 <DreamForm 
                   onClose={() => { setShowForm(false); setEditDream(null); }}
@@ -173,13 +173,13 @@ export default function Dreams() {
 
         {/* Dreams List */}
         {isLoading ? (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {[1, 2, 3].map(i => (
               <div key={i} className="h-40 rounded-xl bg-white animate-pulse" />
             ))}
           </div>
         ) : filteredDreams.length > 0 ? (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {filteredDreams.map(dream => (
               <DreamCard
                 key={dream.id}

@@ -14,23 +14,23 @@ const moods = [
 export default function MoodSelector({ value, onChange, label }) {
   return (
     <div className="space-y-2">
-      {label && <label className="text-sm font-medium text-slate-700">{label}</label>}
-      <div className="flex flex-wrap gap-2">
+      {label && <label className="text-xs sm:text-sm font-medium text-slate-700">{label}</label>}
+      <div className="flex flex-wrap gap-1.5 sm:gap-2">
         {moods.map((mood) => (
           <button
             key={mood.value}
             type="button"
             onClick={() => onChange(mood.value)}
             className={cn(
-              "flex items-center gap-1.5 px-3 py-2 rounded-full border-2 transition-all duration-200",
-              "hover:scale-105 hover:shadow-md",
+              "flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-full border-2 transition-all duration-200",
+              "hover:scale-105 hover:shadow-md active:scale-95",
               value === mood.value 
-                ? `${mood.color} ring-2 ring-offset-2 ring-indigo-400` 
+                ? `${mood.color} ring-2 ring-offset-1 sm:ring-offset-2 ring-indigo-400` 
                 : "bg-white border-slate-200 text-slate-600 hover:border-slate-300"
             )}
           >
-            <span className="text-lg">{mood.emoji}</span>
-            <span className="text-sm font-medium">{mood.label}</span>
+            <span className="text-base sm:text-lg">{mood.emoji}</span>
+            <span className="text-xs sm:text-sm font-medium">{mood.label}</span>
           </button>
         ))}
       </div>

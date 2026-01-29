@@ -53,16 +53,16 @@ export default function Layout({ children, currentPageName }) {
 
       {/* Sidebar */}
       <aside className={cn(
-        "fixed lg:static inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200 flex flex-col transition-transform duration-300",
+        "fixed lg:static inset-y-0 left-0 z-50 w-64 sm:w-72 bg-white border-r border-slate-200 flex flex-col transition-transform duration-300",
         sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}>
         {/* Logo */}
-        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-100">
-          <Link to={createPageUrl('Home')} className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-200">
-              <Moon className="w-5 h-5 text-white" />
+        <div className="h-16 flex items-center justify-between px-4 sm:px-6 border-b border-slate-100">
+          <Link to={createPageUrl('Home')} className="flex items-center gap-2 sm:gap-3">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-200">
+              <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <span className="font-bold text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="font-bold text-lg sm:text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
               DreamStream
             </span>
           </Link>
@@ -75,7 +75,7 @@ export default function Layout({ children, currentPageName }) {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-1">
+        <nav className="flex-1 p-3 sm:p-4 space-y-1 overflow-y-auto">
           {navItems.map((item) => {
             const isActive = currentPageName === item.page;
             return (
@@ -84,14 +84,14 @@ export default function Layout({ children, currentPageName }) {
                 to={createPageUrl(item.page)}
                 onClick={() => setSidebarOpen(false)}
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-200",
+                  "flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl font-medium transition-all duration-200 text-sm sm:text-base",
                   isActive 
                     ? "bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-700 shadow-sm" 
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                 )}
               >
                 <item.icon className={cn(
-                  "w-5 h-5",
+                  "w-5 h-5 flex-shrink-0",
                   isActive ? "text-indigo-600" : "text-slate-400"
                 )} />
                 {item.name}
@@ -102,33 +102,34 @@ export default function Layout({ children, currentPageName }) {
         </nav>
 
         {/* User Section */}
-        <div className="p-4 border-t border-slate-100">
+        <div className="p-3 sm:p-4 border-t border-slate-100">
           {user ? (
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center text-white font-semibold">
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-xl bg-slate-50">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center text-white font-semibold flex-shrink-0 text-sm">
                   {user.full_name?.[0] || user.email?.[0]?.toUpperCase() || 'U'}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-slate-800 truncate">{user.full_name || 'User'}</p>
+                  <p className="font-medium text-sm sm:text-base text-slate-800 truncate">{user.full_name || 'User'}</p>
                   <p className="text-xs text-slate-500 truncate">{user.email}</p>
                 </div>
               </div>
-              <div className="flex items-center justify-between">
-                <CreditBadge credits={userCredits?.total_credits} size="small" />
+              <div className="flex items-center justify-between gap-2">
+                <CreditBadge credits={userCredits?.total_credits} size="small" showLabel={false} />
                 <Button 
                   variant="ghost" 
                   size="sm" 
                   onClick={handleLogout}
-                  className="text-slate-500 hover:text-red-600"
+                  className="text-slate-500 hover:text-red-600 text-xs sm:text-sm"
                 >
                   <LogOut className="w-4 h-4" />
+                  <span className="ml-1">Logout</span>
                 </Button>
               </div>
             </div>
           ) : (
             <Button 
-              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600"
+              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-sm sm:text-base"
               onClick={() => base44.auth.redirectToLogin()}
             >
               Sign In
@@ -140,24 +141,28 @@ export default function Layout({ children, currentPageName }) {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Bar */}
-        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 lg:px-8 sticky top-0 z-30">
-          <button 
-            onClick={() => setSidebarOpen(true)}
-            className="lg:hidden p-2 -ml-2 rounded-lg hover:bg-slate-100"
-          >
-            <Menu className="w-5 h-5 text-slate-600" />
-          </button>
+        <header className="h-14 sm:h-16 bg-white border-b border-slate-200 flex items-center justify-between px-3 sm:px-4 lg:px-8 sticky top-0 z-30">
+          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+            <button 
+              onClick={() => setSidebarOpen(true)}
+              className="lg:hidden p-1.5 sm:p-2 -ml-1 rounded-lg hover:bg-slate-100 flex-shrink-0"
+            >
+              <Menu className="w-5 h-5 text-slate-600" />
+            </button>
 
-          <div className="hidden lg:block">
-            <h1 className="text-lg font-semibold text-slate-800">{currentPageName}</h1>
+            <h1 className="text-base sm:text-lg font-semibold text-slate-800 truncate">
+              {currentPageName}
+            </h1>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:block">
-              <CreditBadge credits={userCredits?.total_credits} />
-            </div>
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <CreditBadge 
+              credits={userCredits?.total_credits} 
+              size="small"
+              showLabel={false}
+            />
             {user && (
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center text-white font-semibold text-sm lg:hidden">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center text-white font-semibold text-xs sm:text-sm lg:hidden">
                 {user.full_name?.[0] || user.email?.[0]?.toUpperCase() || 'U'}
               </div>
             )}
