@@ -60,25 +60,31 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/20 to-purple-50/20">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
-        <div className="flex flex-col gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col gap-4 sm:gap-5 mb-8 sm:mb-10"
+        >
           <div>
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">
-              Welcome back{user?.full_name ? `, ${user.full_name.split(' ')[0]}` : ''}!
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-900 bg-clip-text text-transparent">
+              Welcome back{user?.full_name ? `, ${user.full_name.split(' ')[0]}` : ''}! ✨
             </h1>
-            <p className="text-sm sm:text-base text-slate-600 mt-1">Track your dreams and unlock your subconscious</p>
+            <p className="text-sm sm:text-base text-slate-600 mt-2 font-medium">Track your dreams and unlock your subconscious</p>
           </div>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
             <CreditBadge credits={userCredits?.total_credits} size="default" />
             <Link to={createPageUrl('Dreams')} className="flex-1 sm:flex-none">
-              <Button className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-200 text-sm sm:text-base">
-                <Plus className="w-4 h-4 mr-1.5 sm:mr-2" /> Log Dream
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 shadow-xl shadow-indigo-200/50 text-sm sm:text-base rounded-xl font-semibold">
+                  <Plus className="w-4 h-4 mr-2" /> Log Dream
+                </Button>
+              </motion.div>
             </Link>
           </div>
-        </div>
+        </motion.div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">

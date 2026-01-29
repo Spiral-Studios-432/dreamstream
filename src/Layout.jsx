@@ -57,60 +57,82 @@ export default function Layout({ children, currentPageName }) {
         sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}>
         {/* Logo */}
-        <div className="h-16 flex items-center justify-between px-4 sm:px-6 border-b border-slate-100">
-          <Link to={createPageUrl('Home')} className="flex items-center gap-2 sm:gap-3">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-200">
+        <div className="h-16 flex items-center justify-between px-4 sm:px-6 border-b border-slate-100/50">
+          <Link to={createPageUrl('Home')} className="flex items-center gap-2 sm:gap-3 group">
+            <motion.div 
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-200/50 group-hover:shadow-indigo-300/70 transition-shadow"
+              whileHover={{ scale: 1.05, rotate: 5 }}
+            >
               <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            </div>
-            <span className="font-bold text-lg sm:text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            </motion.div>
+            <span className="font-bold text-lg sm:text-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               DreamStream
             </span>
           </Link>
           <button 
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-2 rounded-lg hover:bg-slate-100"
+            className="lg:hidden p-2 rounded-xl hover:bg-slate-100/80 transition-colors"
           >
             <X className="w-5 h-5 text-slate-500" />
           </button>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-3 sm:p-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 p-3 sm:p-4 space-y-1.5 overflow-y-auto">
           {navItems.map((item) => {
             const isActive = currentPageName === item.page;
             return (
-              <Link
+              <motion.div
                 key={item.page}
-                to={createPageUrl(item.page)}
-                onClick={() => setSidebarOpen(false)}
-                className={cn(
-                  "flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl font-medium transition-all duration-200 text-sm sm:text-base",
-                  isActive 
-                    ? "bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-700 shadow-sm" 
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                )}
+                whileHover={{ x: 4 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <item.icon className={cn(
-                  "w-5 h-5 flex-shrink-0",
-                  isActive ? "text-indigo-600" : "text-slate-400"
-                )} />
-                {item.name}
-                {isActive && <ChevronRight className="w-4 h-4 ml-auto text-indigo-400" />}
-              </Link>
+                <Link
+                  to={createPageUrl(item.page)}
+                  onClick={() => setSidebarOpen(false)}
+                  className={cn(
+                    "flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 rounded-2xl font-medium transition-all duration-200 text-sm sm:text-base relative overflow-hidden group",
+                    isActive 
+                      ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-200/50" 
+                      : "text-slate-600 hover:bg-gradient-to-r hover:from-slate-50 hover:to-indigo-50/30 hover:text-slate-900"
+                  )}
+                >
+                  {isActive && (
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
+                      layoutId="activeNav"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <item.icon className={cn(
+                    "w-5 h-5 flex-shrink-0 relative z-10",
+                    isActive ? "text-white" : "text-slate-400 group-hover:text-indigo-500 transition-colors"
+                  )} />
+                  <span className="relative z-10">{item.name}</span>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                    >
+                      <ChevronRight className="w-4 h-4 ml-auto text-white/80 relative z-10" />
+                    </motion.div>
+                  )}
+                </Link>
+              </motion.div>
             );
           })}
         </nav>
 
         {/* User Section */}
-        <div className="p-3 sm:p-4 border-t border-slate-100">
+        <div className="p-3 sm:p-4 border-t border-slate-100/50">
           {user ? (
             <div className="space-y-2 sm:space-y-3">
-              <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-xl bg-slate-50">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center text-white font-semibold flex-shrink-0 text-sm">
+              <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-indigo-50/30 border border-slate-100/50">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 flex items-center justify-center text-white font-semibold flex-shrink-0 text-sm shadow-lg">
                   {user.full_name?.[0] || user.email?.[0]?.toUpperCase() || 'U'}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-sm sm:text-base text-slate-800 truncate">{user.full_name || 'User'}</p>
+                  <p className="font-semibold text-sm sm:text-base text-slate-800 truncate">{user.full_name || 'User'}</p>
                   <p className="text-xs text-slate-500 truncate">{user.email}</p>
                 </div>
               </div>
@@ -120,7 +142,7 @@ export default function Layout({ children, currentPageName }) {
                   variant="ghost" 
                   size="sm" 
                   onClick={handleLogout}
-                  className="text-slate-500 hover:text-red-600 text-xs sm:text-sm"
+                  className="text-slate-500 hover:text-red-500 hover:bg-red-50 text-xs sm:text-sm rounded-xl transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
                   <span className="ml-1">Logout</span>
@@ -129,7 +151,7 @@ export default function Layout({ children, currentPageName }) {
             </div>
           ) : (
             <Button 
-              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-sm sm:text-base"
+              className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-sm sm:text-base shadow-lg shadow-indigo-200/50 rounded-xl"
               onClick={() => base44.auth.redirectToLogin()}
             >
               Sign In
@@ -141,30 +163,37 @@ export default function Layout({ children, currentPageName }) {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Bar */}
-        <header className="h-14 sm:h-16 bg-white border-b border-slate-200 flex items-center justify-between px-3 sm:px-4 lg:px-8 sticky top-0 z-30">
+        <header className="h-14 sm:h-16 bg-white/70 backdrop-blur-xl border-b border-slate-200/50 flex items-center justify-between px-3 sm:px-4 lg:px-8 sticky top-0 z-30 shadow-sm">
           <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-            <button 
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-1.5 sm:p-2 -ml-1 rounded-lg hover:bg-slate-100 flex-shrink-0"
+              className="lg:hidden p-1.5 sm:p-2 -ml-1 rounded-xl hover:bg-slate-100/80 flex-shrink-0 transition-colors"
             >
               <Menu className="w-5 h-5 text-slate-600" />
-            </button>
+            </motion.button>
 
-            <h1 className="text-base sm:text-lg font-semibold text-slate-800 truncate">
+            <h1 className="text-base sm:text-lg font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent truncate">
               {currentPageName}
             </h1>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-            <CreditBadge 
-              credits={userCredits?.total_credits} 
-              size="small"
-              showLabel={false}
-            />
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <CreditBadge 
+                credits={userCredits?.total_credits} 
+                size="small"
+                showLabel={false}
+              />
+            </motion.div>
             {user && (
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center text-white font-semibold text-xs sm:text-sm lg:hidden">
+              <motion.div 
+                whileHover={{ scale: 1.05, rotate: 5 }}
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 flex items-center justify-center text-white font-semibold text-xs sm:text-sm lg:hidden shadow-lg"
+              >
                 {user.full_name?.[0] || user.email?.[0]?.toUpperCase() || 'U'}
-              </div>
+              </motion.div>
             )}
           </div>
         </header>

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
 import { cn } from "@/lib/utils";
+import { motion } from 'framer-motion';
 
 export default function CreditBadge({ credits, size = 'default', showLabel = true }) {
   const sizeClasses = {
-    small: 'text-xs px-2 py-1',
-    default: 'text-sm px-3 py-1.5',
-    large: 'text-base px-4 py-2'
+    small: 'text-xs px-3 py-1.5',
+    default: 'text-sm px-4 py-2',
+    large: 'text-base px-5 py-2.5'
   };
 
   const iconSizes = {
@@ -16,15 +17,19 @@ export default function CreditBadge({ credits, size = 'default', showLabel = tru
   };
 
   return (
-    <div className={cn(
-      "inline-flex items-center gap-1.5 rounded-full",
-      "bg-gradient-to-r from-amber-100 to-yellow-100",
-      "border border-amber-200 text-amber-700 font-semibold",
-      sizeClasses[size]
-    )}>
-      <Sparkles className={cn(iconSizes[size], "text-amber-500")} />
-      <span>{credits?.toLocaleString() || 0}</span>
-      {showLabel && <span className="font-normal text-amber-600">credits</span>}
-    </div>
+    <motion.div 
+      whileHover={{ scale: 1.05 }}
+      className={cn(
+        "inline-flex items-center gap-2 rounded-full relative overflow-hidden",
+        "bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-400 bg-size-200 animate-gradient",
+        "shadow-lg shadow-amber-200/50 text-white font-bold",
+        sizeClasses[size]
+      )}
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent" />
+      <Sparkles className={cn(iconSizes[size], "relative z-10 drop-shadow")} />
+      <span className="relative z-10">{credits?.toLocaleString() || 0}</span>
+      {showLabel && <span className="font-medium relative z-10 text-white/90">credits</span>}
+    </motion.div>
   );
 }

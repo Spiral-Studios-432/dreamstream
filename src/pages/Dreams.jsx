@@ -87,26 +87,36 @@ export default function Dreams() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/20 to-purple-50/20">
       <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
-        <div className="flex flex-col gap-3 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="p-2 sm:p-3 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-lg shadow-indigo-200">
-              <Moon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-            </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col gap-4 sm:gap-5 mb-6 sm:mb-8"
+        >
+          <div className="flex items-center gap-3 sm:gap-4">
+            <motion.div 
+              whileHover={{ rotate: 360, scale: 1.1 }}
+              transition={{ duration: 0.5 }}
+              className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-xl shadow-indigo-200/50"
+            >
+              <Moon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+            </motion.div>
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Dream Journal</h1>
-              <p className="text-xs sm:text-sm text-slate-600">{dreams.length} dreams recorded</p>
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">Dream Journal</h1>
+              <p className="text-sm sm:text-base text-slate-600 font-medium">{dreams.length} dreams recorded</p>
             </div>
           </div>
-          <Button 
-            onClick={() => { setEditDream(null); setShowForm(true); }}
-            className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-200 text-sm sm:text-base"
-          >
-            <Plus className="w-4 h-4 mr-1.5 sm:mr-2" /> Log Dream
-          </Button>
-        </div>
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button 
+              onClick={() => { setEditDream(null); setShowForm(true); }}
+              className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 shadow-xl shadow-indigo-200/50 text-sm sm:text-base rounded-xl font-semibold"
+            >
+              <Plus className="w-5 h-5 mr-2" /> Log Dream
+            </Button>
+          </motion.div>
+        </motion.div>
 
         {/* Filters */}
         <div className="flex flex-col gap-2 sm:gap-3 mb-4 sm:mb-6">
