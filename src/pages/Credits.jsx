@@ -1,0 +1,220 @@
+import React, { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { base44 } from '@/api/base44Client';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Sparkles, Moon, BookOpen, Flame, Gift, Star, Crown, Check, Zap } from 'lucide-react';
+import CreditBadge from '../components/ui/CreditBadge';
+import { cn } from "@/lib/utils";
+
+const tiers = [
+  {
+    name: 'Free',
+    value: 'free',
+    price: '$0',
+    color: 'from-slate-500 to-slate-600',
+    features: [
+      '5 AI interpretations/month',
+      'Basic mood tracking',
+      'Daily reflections',
+      'Standard support',
+    ],
+  },
+  {
+    name: 'Dreamer',
+    value: 'dreamer',
+    price: '$4.99/mo',
+    color: 'from-indigo-500 to-purple-500',
+    popular: true,
+    features: [
+      'Unlimited AI interpretations',
+      'Advanced analytics',
+      'Pattern recognition',
+      'Priority support',
+      '2x credit earnings',
+    ],
+  },
+  {
+    name: 'Visionary',
+    value: 'visionary',
+    price: '$9.99/mo',
+    color: 'from-amber-500 to-orange-500',
+    features: [
+      'Everything in Dreamer',
+      'Exclusive dream themes',
+      'Personal dream coach',
+      '24/7 priority support',
+      '3x credit earnings',
+      'Early feature access',
+    ],
+  },
+];
+
+const earnMethods = [
+  { icon: Moon, title: 'Log a Dream', credits: 10, description: 'Record your dreams daily' },
+  { icon: BookOpen, title: 'Daily Reflection', credits: 5, description: 'Complete your daily prompt' },
+  { icon: Flame, title: '7-Day Streak', credits: 25, description: 'Bonus for consistency' },
+  { icon: Gift, title: 'Refer a Friend', credits: 50, description: 'When they sign up' },
+];
+
+export default function Credits() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    base44.auth.me().then(setUser);
+  }, []);
+
+  const { data: userCredits } = useQuery({
+    queryKey: ['userCredits', user?.email],
+    queryFn: async () => {
+      if (!user?.email) return null;
+      const credits = await base44.entities.UserCredits.filter({ user_email: user.email });
+      return credits[0] || null;
+    },
+    enabled: !!user?.email,
+  });
+
+  const currentTier = tiers.find(t => t.value === (userCredits?.tier || 'free')) || tiers[0];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/30">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <Sparkles className="w-4 h-4" /> No Ads - Ever!
+          </div>
+          <h1 className="text-3xl font-bold text-slate-900 mb-2">Credits & Premium</h1>
+          <p className="text-slate-600">Earn credits for free or upgrade for unlimited features</p>
+        </div>
+
+        {/* Current Balance */}
+        <Card className="border-0 shadow-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white mb-8">
+          <CardContent className="p-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div>
+                <p className="text-indigo-100 mb-2">Your Balance</p>
+                <div className="flex items-baseline gap-3">
+                  <span className="text-5xl font-bold">{userCredits?.total_credits || 0}</span>
+                  <span className="text-xl text-indigo-200">credits</span>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                  <p className="text-indigo-200 text-sm mb-1">Current Tier</p>
+                  <p className="font-semibold text-lg">{currentTier.name}</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                  <p className="text-indigo-200 text-sm mb-1">Streak Bonus</p>
+                  <p className="font-semibold text-lg">{userCredits?.streak_days || 0} days 🔥</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* How to Earn Credits */}
+        <div className="mb-10">
+          <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <Zap className="w-5 h-5 text-amber-500" /> Ways to Earn Credits
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {earnMethods.map((method, i) => (
+              <Card key={i} className="border-0 shadow-md hover:shadow-lg transition-shadow">
+                <CardContent className="p-5">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2.5 rounded-xl bg-gradient-to-br from-amber-100 to-orange-100">
+                      <method.icon className="w-5 h-5 text-amber-600" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-semibold text-slate-800">{method.title}</h3>
+                        <Badge className="bg-amber-100 text-amber-700 text-xs">+{method.credits}</Badge>
+                      </div>
+                      <p className="text-sm text-slate-500">{method.description}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Tier Plans */}
+        <div className="mb-10">
+          <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <Crown className="w-5 h-5 text-purple-500" /> Choose Your Plan
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {tiers.map((tier) => {
+              const isCurrent = tier.value === (userCredits?.tier || 'free');
+              return (
+                <Card 
+                  key={tier.value}
+                  className={cn(
+                    "border-0 shadow-lg relative overflow-hidden transition-transform hover:scale-[1.02]",
+                    tier.popular && "ring-2 ring-indigo-500"
+                  )}
+                >
+                  {tier.popular && (
+                    <div className="absolute top-4 right-4">
+                      <Badge className="bg-indigo-600 text-white">Most Popular</Badge>
+                    </div>
+                  )}
+                  <CardHeader className={cn(
+                    "bg-gradient-to-r text-white",
+                    tier.color
+                  )}>
+                    <CardTitle className="flex items-center gap-2">
+                      {tier.value === 'visionary' && <Crown className="w-5 h-5" />}
+                      {tier.value === 'dreamer' && <Star className="w-5 h-5" />}
+                      {tier.name}
+                    </CardTitle>
+                    <div className="text-3xl font-bold mt-2">{tier.price}</div>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <ul className="space-y-3 mb-6">
+                      {tier.features.map((feature, i) => (
+                        <li key={i} className="flex items-center gap-2 text-sm text-slate-600">
+                          <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <Button 
+                      className={cn(
+                        "w-full",
+                        isCurrent 
+                          ? "bg-slate-200 text-slate-600 cursor-default" 
+                          : `bg-gradient-to-r ${tier.color} hover:opacity-90`
+                      )}
+                      disabled={isCurrent}
+                    >
+                      {isCurrent ? 'Current Plan' : tier.value === 'free' ? 'Downgrade' : 'Upgrade'}
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* No Ads Promise */}
+        <Card className="border-0 shadow-lg bg-gradient-to-r from-emerald-50 to-teal-50">
+          <CardContent className="p-8 text-center">
+            <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
+              <Check className="w-8 h-8 text-emerald-600" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 mb-2">100% Ad-Free Experience</h3>
+            <p className="text-slate-600 max-w-md mx-auto">
+              We believe in respecting your time and attention. DreamStream is completely free of advertisements. 
+              Support us by earning credits through engagement or upgrading to premium.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
