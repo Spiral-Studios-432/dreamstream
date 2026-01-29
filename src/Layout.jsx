@@ -9,6 +9,7 @@ import {
 import CreditBadge from './components/ui/CreditBadge';
 import { cn } from "@/lib/utils";
 import { useQuery } from '@tanstack/react-query';
+import { motion } from 'framer-motion';
 
 const navItems = [
   { name: 'Home', icon: Home, page: 'Home' },
@@ -42,18 +43,21 @@ export default function Layout({ children, currentPageName }) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 flex">
       {/* Sidebar Overlay for Mobile */}
       {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside className={cn(
-        "fixed lg:static inset-y-0 left-0 z-50 w-64 sm:w-72 bg-white border-r border-slate-200 flex flex-col transition-transform duration-300",
+        "fixed lg:static inset-y-0 left-0 z-50 w-64 sm:w-72 bg-white/80 backdrop-blur-xl border-r border-slate-200/50 flex flex-col transition-transform duration-300 shadow-xl lg:shadow-none",
         sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}>
         {/* Logo */}
