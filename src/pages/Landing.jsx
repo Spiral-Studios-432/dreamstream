@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Moon, Sparkles, BookOpen, Heart, ArrowRight } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 
 export default function Landing() {
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    base44.auth.isAuthenticated().then(setIsAuthenticated);
+  }, []);
+
   const handleGetStarted = () => {
-    base44.auth.redirectToLogin();
+    if (isAuthenticated) {
+      navigate(createPageUrl('Home'));
+    } else {
+      base44.auth.redirectToLogin(createPageUrl('Home'));
+    }
   };
 
   return (
