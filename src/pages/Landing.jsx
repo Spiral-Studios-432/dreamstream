@@ -18,7 +18,7 @@ export default function Landing() {
     if (isAuthenticated) {
       navigate(createPageUrl('Home'));
     } else {
-      base44.auth.redirectToLogin(createPageUrl('Home'));
+      base44.auth.redirectToLogin();
     }
   };
 
