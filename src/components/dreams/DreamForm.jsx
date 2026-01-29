@@ -53,22 +53,41 @@ export default function DreamForm({ onClose, onSave, editDream }) {
     if (!formData.content.trim()) return;
     setInterpreting(true);
     
-    const result = await base44.integrations.Core.InvokeLLM({
-      prompt: `You are a dream interpretation expert. Analyze this dream and provide a meaningful, insightful interpretation. Be supportive and thoughtful.
+    try {
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `You are an expert dream analyst with deep knowledge of Jungian psychology, symbolism, and dream interpretation. Analyze this dream comprehensively and provide meaningful insights.
 
-Dream Title: ${formData.title}
-Dream Content: ${formData.content}
-Mood before sleep: ${formData.mood_before}
-Mood upon waking: ${formData.mood_after}
-Dream type: ${formData.dream_type}
+**DREAM DETAILS:**
+Title: ${formData.title}
+Content: ${formData.content}
+Mood Before Sleep: ${formData.mood_before}
+Mood Upon Waking: ${formData.mood_after}
+Dream Type: ${formData.dream_type}
+Tags: ${formData.tags.join(', ') || 'none'}
 
-Provide a 2-3 paragraph interpretation focusing on:
-1. Key symbols and their potential meanings
-2. Emotional themes and what they might represent
-3. Actionable insights or reflections`,
-    });
+**ANALYSIS STRUCTURE:**
+Provide a detailed interpretation with the following sections:
+
+🔮 **Key Symbols & Their Meanings:**
+Identify the most significant symbols in the dream and explain their potential psychological and archetypal meanings. Consider cultural, personal, and universal symbolism.
+
+💭 **Emotional Themes:**
+Analyze the emotional landscape of the dream. What do the mood shifts (from ${formData.mood_before} to ${formData.mood_after}) suggest? What underlying feelings or anxieties might be surfacing?
+
+🧠 **Psychological Insights:**
+Explore what the dream might reveal about the dreamer's subconscious mind, current life circumstances, unresolved conflicts, or personal growth opportunities.
+
+✨ **Actionable Reflections:**
+Offer 2-3 thoughtful questions or reflections the dreamer can contemplate. These should help them connect the dream to their waking life.
+
+Keep the tone warm, supportive, and insightful. Aim for 3-4 paragraphs total.`,
+      });
+      
+      handleChange('interpretation', result);
+    } catch (error) {
+      handleChange('interpretation', 'Unable to generate interpretation. Please try again.');
+    }
     
-    handleChange('interpretation', result);
     setInterpreting(false);
   };
 
