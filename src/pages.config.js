@@ -52,6 +52,7 @@ import Dreams from './pages/Dreams';
 import Reflections from './pages/Reflections';
 import Support from './pages/Support';
 import Credits from './pages/Credits';
+import Landing from './pages/Landing';
 import __Layout from './Layout.jsx';
 
 
@@ -61,6 +62,7 @@ export const PAGES = {
     "Reflections": Reflections,
     "Support": Support,
     "Credits": Credits,
+    "Landing": Landing,
 }
 
 export const pagesConfig = {
