@@ -33,6 +33,7 @@ export default function DreamForm({ onClose, onSave, editDream }) {
   const [tagInput, setTagInput] = useState('');
   const [interpreting, setInterpreting] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [personalContext, setPersonalContext] = useState('');
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -64,21 +65,22 @@ Mood Before Sleep: ${formData.mood_before}
 Mood Upon Waking: ${formData.mood_after}
 Dream Type: ${formData.dream_type}
 Tags: ${formData.tags.join(', ') || 'none'}
+${personalContext.trim() ? `\n**PERSONAL CONTEXT PROVIDED BY THE DREAMER:**\n${personalContext}\n\nIMPORTANT: Use this personal context heavily to tailor your interpretation. Reference specific life events, personal symbol meanings, or circumstances the dreamer has shared. Make the insights feel deeply personal and directly relevant to their current situation rather than generic.` : ''}
 
 **ANALYSIS STRUCTURE:**
 Provide a detailed interpretation with the following sections:
 
 🔮 **Key Symbols & Their Meanings:**
-Identify the most significant symbols in the dream and explain their potential psychological and archetypal meanings. Consider cultural, personal, and universal symbolism.
+Identify the most significant symbols in the dream and explain their potential psychological and archetypal meanings.${personalContext.trim() ? ' Where the dreamer has provided personal meanings for symbols, prioritise those over generic interpretations.' : ' Consider cultural, personal, and universal symbolism.'}
 
 💭 **Emotional Themes:**
-Analyze the emotional landscape of the dream. What do the mood shifts (from ${formData.mood_before} to ${formData.mood_after}) suggest? What underlying feelings or anxieties might be surfacing?
+Analyze the emotional landscape of the dream. What do the mood shifts (from ${formData.mood_before} to ${formData.mood_after}) suggest? What underlying feelings or anxieties might be surfacing?${personalContext.trim() ? ' Connect these to the personal context shared.' : ''}
 
 🧠 **Psychological Insights:**
-Explore what the dream might reveal about the dreamer's subconscious mind, current life circumstances, unresolved conflicts, or personal growth opportunities.
+Explore what the dream might reveal about the dreamer's subconscious mind${personalContext.trim() ? ', directly referencing their current life circumstances they have described' : ', current life circumstances, unresolved conflicts, or personal growth opportunities'}.
 
 ✨ **Actionable Reflections:**
-Offer 2-3 thoughtful questions or reflections the dreamer can contemplate. These should help them connect the dream to their waking life.
+Offer 2-3 thoughtful questions or reflections the dreamer can contemplate.${personalContext.trim() ? ' Ground these in the specific context they have shared to make them immediately actionable.' : ' These should help them connect the dream to their waking life.'}
 
 Keep the tone warm, supportive, and insightful. Aim for 3-4 paragraphs total.`,
       });
@@ -216,26 +218,37 @@ Keep the tone warm, supportive, and insightful. Aim for 3-4 paragraphs total.`,
             </div>
           </div>
 
-          <div className="border-t pt-6">
-            <div className="flex items-center justify-between mb-3">
-              <label className="text-sm font-medium text-slate-700">AI Interpretation</label>
-              <Button 
-                type="button" 
-                variant="outline" 
-                size="sm"
-                onClick={getInterpretation}
-                disabled={interpreting || !formData.content.trim()}
-                className="text-indigo-600 border-indigo-200 hover:bg-indigo-50"
-              >
-                {interpreting ? (
-                  <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Interpreting...</>
-                ) : (
-                  <><Sparkles className="w-4 h-4 mr-2" /> Get Interpretation</>
-                )}
-              </Button>
+          <div className="border-t pt-6 space-y-4">
+            <div>
+              <label className="text-sm font-medium text-slate-700 mb-1 block flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-indigo-500" />
+                AI Dream Interpretation
+              </label>
+              <p className="text-xs text-slate-500 mb-3">
+                Optionally share personal context to get a more tailored interpretation — recent life events, stress, or what specific symbols mean to you.
+              </p>
+              <Textarea
+                value={personalContext}
+                onChange={(e) => setPersonalContext(e.target.value)}
+                placeholder="e.g. I've been stressed about a job change lately. Water usually represents anxiety for me. My grandmother passed away last month..."
+                className="min-h-[80px] border-slate-200 text-sm bg-indigo-50/30 placeholder:text-slate-400 resize-none"
+              />
             </div>
+            <Button 
+              type="button" 
+              variant="outline"
+              onClick={getInterpretation}
+              disabled={interpreting || !formData.content.trim()}
+              className="w-full text-indigo-600 border-indigo-200 hover:bg-indigo-50 font-semibold"
+            >
+              {interpreting ? (
+                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analysing your dream...</>
+              ) : (
+                <><Sparkles className="w-4 h-4 mr-2" /> {formData.interpretation ? 'Re-interpret Dream' : 'Interpret Dream'}</>
+              )}
+            </Button>
             {formData.interpretation && (
-              <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 text-slate-700 text-sm whitespace-pre-wrap">
+              <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 border border-indigo-100 text-slate-700 text-sm whitespace-pre-wrap leading-relaxed">
                 {formData.interpretation}
               </div>
             )}
