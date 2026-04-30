@@ -135,7 +135,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black leading-none tracking-tight mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-black leading-none tracking-tight mb-6"
           >
             <span className="block text-white">Unlock the</span>
             <span
@@ -158,7 +158,7 @@ export default function Landing() {
             transition={{ duration: 0.9, delay: 0.4 }}
             className="text-lg sm:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            A luminous space where you capture the whispers of your sleeping mind,
+            Capture the whispers of your sleeping mind,
             decode symbols, and discover what your subconscious has been trying to tell you.
           </motion.p>
 
@@ -317,7 +317,7 @@ export default function Landing() {
           <div className="space-y-6">
             {[
               { step: '01', icon: Moon, title: 'Wake up & Record', desc: 'Capture your dream immediately — details, emotions, symbols — before they fade into morning light.' },
-              { step: '02', icon: Eye, title: 'Add your context', desc: 'Share what\'s happening in your life. Recent stress, major events, recurring feelings. The AI listens.' },
+              { step: '02', icon: Eye, title: 'Add your context', desc: 'Share what\'s happening in your life. Recent stress, major events, recurring feelings.' },
               { step: '03', icon: Zap, title: 'Receive deep insights', desc: 'Get a personalized, Jungian-inspired interpretation that connects your dreams to your waking life.' },
             ].map((item, i) => (
               <motion.div
@@ -407,7 +407,7 @@ export default function Landing() {
               DreamStream
             </span>
           </div>
-          <p>© 2026 DreamStream. A luminous space for your dreams.</p>
+          <p>© 2026 DreamStream. A space for your dreams.</p>
         </div>
       </div>
     </div>
