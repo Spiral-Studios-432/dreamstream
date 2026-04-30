@@ -332,7 +332,7 @@ export default function Landing() {
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
         >
-          <div className="relative rounded-3xl overflow-hidden p-16"
+          <div className="relative rounded-3xl overflow-hidden p-8 sm:p-16"
             style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.3) 0%, rgba(99,102,241,0.2) 50%, rgba(168,85,247,0.3) 100%)', border: '1px solid rgba(139,92,246,0.3)', backdropFilter: 'blur(20px)' }}
           >
             <div className="absolute inset-0 pointer-events-none">
