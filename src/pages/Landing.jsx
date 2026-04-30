@@ -236,7 +236,7 @@ export default function Landing() {
               },
               {
                 icon: Sparkles,
-                title: 'AI Interpretation',
+                title: 'Dream Interpretation',
                 description: 'Get deep Jungian-inspired analyses personalized to your life, symbols, and emotional landscape.',
                 gradient: 'from-violet-500 to-pink-500',
                 glow: 'shadow-violet-500/30',
