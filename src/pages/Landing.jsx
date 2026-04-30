@@ -158,7 +158,7 @@ export default function Landing() {
             transition={{ duration: 0.9, delay: 0.4 }}
             className="text-lg sm:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            A luminous space where you capture the whispers of your sleeping mind,
+            A space where you capture the whispers of your sleeping mind,
             decode symbols, and discover what your subconscious has been trying to tell you.
           </motion.p>
 
@@ -407,7 +407,7 @@ export default function Landing() {
               DreamStream
             </span>
           </div>
-          <p>© 2026 DreamStream. A luminous space for your dreams.</p>
+          <p>© 2026 DreamStream. A space for your dreams.</p>
         </div>
       </div>
     </div>
