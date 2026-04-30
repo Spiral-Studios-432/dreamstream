@@ -16,6 +16,7 @@ const dreamTypes = [
   { value: 'recurring', label: 'Recurring Dream' },
   { value: 'vivid', label: 'Vivid Dream' },
   { value: 'prophetic', label: 'Prophetic Dream' },
+  { value: 'other', label: 'Other' },
 ];
 
 export default function DreamForm({ onClose, onSave, editDream }) {
@@ -164,7 +165,7 @@ Keep the tone warm, supportive, and insightful. Aim for 3-4 paragraphs total.`,
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div className="sm:col-span-3">
               <label className="text-xs sm:text-sm font-medium text-slate-700 mb-1.5 block">Dream Type</label>
-              <Select value={formData.dream_type} onValueChange={(v) => handleChange('dream_type', v)}>
+              <Select value={formData.dream_type} onValueChange={(v) => { handleChange('dream_type', v); if (v !== 'other') handleChange('dream_type_custom', ''); }}>
                 <SelectTrigger className="border-slate-200 text-sm">
                   <SelectValue />
                 </SelectTrigger>
@@ -176,6 +177,14 @@ Keep the tone warm, supportive, and insightful. Aim for 3-4 paragraphs total.`,
                   ))}
                 </SelectContent>
               </Select>
+              {formData.dream_type === 'other' && (
+                <Input
+                  value={formData.dream_type_custom || ''}
+                  onChange={(e) => handleChange('dream_type_custom', e.target.value)}
+                  placeholder="Describe your dream type..."
+                  className="border-slate-200 text-sm mt-2"
+                />
+              )}
             </div>
             <div className="sm:col-span-3 grid grid-cols-2 gap-4">
               <StarRating 

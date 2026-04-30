@@ -1,0 +1,90 @@
+{
+  "name": "Dream",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the dream"
+    },
+    "content": {
+      "type": "string",
+      "description": "Detailed description of the dream"
+    },
+    "mood_before": {
+      "type": "string",
+      "enum": [
+        "calm",
+        "anxious",
+        "happy",
+        "sad",
+        "excited",
+        "tired",
+        "neutral"
+      ],
+      "description": "Mood before sleep"
+    },
+    "mood_after": {
+      "type": "string",
+      "enum": [
+        "calm",
+        "anxious",
+        "happy",
+        "sad",
+        "excited",
+        "tired",
+        "neutral"
+      ],
+      "description": "Mood upon waking"
+    },
+    "dream_type": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "lucid",
+        "nightmare",
+        "recurring",
+        "vivid",
+        "prophetic",
+        "other"
+      ],
+      "description": "Type of dream"
+    },
+    "dream_type_custom": {
+      "type": "string",
+      "description": "Custom dream type when 'other' is selected"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for categorization"
+    },
+    "interpretation": {
+      "type": "string",
+      "description": "AI-generated interpretation"
+    },
+    "clarity_rating": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "How clear was the dream"
+    },
+    "sleep_quality": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Quality of sleep"
+    },
+    "dream_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the dream"
+    }
+  },
+  "required": [
+    "title",
+    "content",
+    "dream_date"
+  ]
+}
