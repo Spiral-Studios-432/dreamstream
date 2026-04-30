@@ -1,0 +1,53 @@
+{
+  "name": "UserCredits",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "User email for reference"
+    },
+    "total_credits": {
+      "type": "number",
+      "default": 50,
+      "description": "Total credits available"
+    },
+    "streak_days": {
+      "type": "number",
+      "default": 0,
+      "description": "Current streak of consecutive days"
+    },
+    "total_dreams_logged": {
+      "type": "number",
+      "default": 0,
+      "description": "Total dreams logged"
+    },
+    "total_reflections": {
+      "type": "number",
+      "default": 0,
+      "description": "Total reflections completed"
+    },
+    "last_activity_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Last activity date for streak tracking"
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "free",
+        "dreamer",
+        "visionary"
+      ],
+      "default": "free",
+      "description": "User tier level"
+    },
+    "ai_interpretations_used": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of AI interpretations used (free tier limit: 9)"
+    }
+  },
+  "required": [
+    "user_email"
+  ]
+}

@@ -19,7 +19,9 @@ const dreamTypes = [
   { value: 'other', label: 'Other' },
 ];
 
-export default function DreamForm({ onClose, onSave, editDream }) {
+const FREE_INTERPRETATION_LIMIT = 9;
+
+export default function DreamForm({ onClose, onSave, editDream, userCredits }) {
   const [formData, setFormData] = useState(editDream || {
     title: '',
     content: '',
@@ -51,8 +53,13 @@ export default function DreamForm({ onClose, onSave, editDream }) {
     handleChange('tags', formData.tags.filter(t => t !== tag));
   };
 
+  const isPaid = userCredits?.tier && userCredits.tier !== 'free';
+  const interpretationsUsed = userCredits?.ai_interpretations_used || 0;
+  const hasReachedLimit = !isPaid && interpretationsUsed >= FREE_INTERPRETATION_LIMIT;
+
   const getInterpretation = async () => {
     if (!formData.content.trim()) return;
+    if (hasReachedLimit) return;
     setInterpreting(true);
     
     try {
@@ -87,6 +94,12 @@ Keep the tone warm, supportive, and insightful. Aim for 3-4 paragraphs total.`,
       });
       
       handleChange('interpretation', result);
+      // Track usage for free users
+      if (!isPaid && userCredits?.id) {
+        await base44.entities.UserCredits.update(userCredits.id, {
+          ai_interpretations_used: interpretationsUsed + 1,
+        });
+      }
     } catch (error) {
       handleChange('interpretation', 'Unable to generate interpretation. Please try again.');
     }
@@ -243,19 +256,33 @@ Keep the tone warm, supportive, and insightful. Aim for 3-4 paragraphs total.`,
                 className="min-h-[80px] border-slate-200 text-sm bg-indigo-50/30 placeholder:text-slate-400 resize-none"
               />
             </div>
-            <Button 
-              type="button" 
-              variant="outline"
-              onClick={getInterpretation}
-              disabled={interpreting || !formData.content.trim()}
-              className="w-full text-indigo-600 border-indigo-200 hover:bg-indigo-50 font-semibold"
-            >
-              {interpreting ? (
-                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analysing your dream...</>
-              ) : (
-                <><Sparkles className="w-4 h-4 mr-2" /> {formData.interpretation ? 'Re-interpret Dream' : 'Interpret Dream'}</>
-              )}
-            </Button>
+            {hasReachedLimit ? (
+              <div className="w-full p-3 rounded-xl bg-amber-50 border border-amber-200 text-center">
+                <p className="text-amber-700 font-semibold text-sm">🌙 You've used all 9 free interpretations</p>
+                <p className="text-amber-600 text-xs mt-1">Upgrade to the $1.99/month plan for unlimited AI interpretations</p>
+              </div>
+            ) : (
+              <>
+                {!isPaid && (
+                  <p className="text-xs text-slate-400 text-center">
+                    {FREE_INTERPRETATION_LIMIT - interpretationsUsed} free interpretation{FREE_INTERPRETATION_LIMIT - interpretationsUsed !== 1 ? 's' : ''} remaining
+                  </p>
+                )}
+                <Button 
+                  type="button" 
+                  variant="outline"
+                  onClick={getInterpretation}
+                  disabled={interpreting || !formData.content.trim()}
+                  className="w-full text-indigo-600 border-indigo-200 hover:bg-indigo-50 font-semibold"
+                >
+                  {interpreting ? (
+                    <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analysing your dream...</>
+                  ) : (
+                    <><Sparkles className="w-4 h-4 mr-2" /> {formData.interpretation ? 'Re-interpret Dream' : 'Interpret Dream'}</>
+                  )}
+                </Button>
+              </>
+            )}
             {formData.interpretation && (
               <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 border border-indigo-100 text-slate-700 text-sm whitespace-pre-wrap leading-relaxed">
                 {formData.interpretation}

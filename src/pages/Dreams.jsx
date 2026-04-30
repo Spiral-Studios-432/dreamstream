@@ -175,6 +175,7 @@ export default function Dreams() {
                   onClose={() => { setShowForm(false); setEditDream(null); }}
                   onSave={handleSave}
                   editDream={editDream}
+                  userCredits={userCredits}
                 />
               </motion.div>
             </motion.div>
