@@ -79,7 +79,7 @@ export default function Credits() {
   const currentTier = tiers.find(t => t.value === (userCredits?.tier || 'free')) || tiers[0];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/30">
+    <div className="min-h-screen bg-[#03020a]">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8 lg:mb-10">

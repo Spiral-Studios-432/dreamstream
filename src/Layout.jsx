@@ -43,7 +43,7 @@ export default function Layout({ children, currentPageName }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 flex">
+    <div className="min-h-screen bg-[#03020a] flex">
       {/* Sidebar Overlay for Mobile */}
       {sidebarOpen && (
         <motion.div 
