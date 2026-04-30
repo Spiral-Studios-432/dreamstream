@@ -262,7 +262,7 @@ export default function Landing() {
 
       {/* ── STATS BAND ── */}
       <div className="relative z-10 py-16 px-4 border-y border-white/5">
-        <div className="max-w-4xl mx-auto grid grid-cols-3 gap-8 text-center">
+        <div className="max-w-4xl mx-auto grid grid-cols-3 gap-3 sm:gap-8 text-center">
           {[
             { value: '10,000+', label: 'Dreams Logged' },
             { value: '98%', label: 'Feel More Self-Aware' },
@@ -275,7 +275,7 @@ export default function Landing() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
             >
-              <div className="text-3xl sm:text-5xl font-black bg-gradient-to-r from-violet-300 to-indigo-300 bg-clip-text text-transparent mb-2">{stat.value}</div>
+              <div className="text-2xl sm:text-5xl font-black bg-gradient-to-r from-violet-300 to-indigo-300 bg-clip-text text-transparent mb-2">{stat.value}</div>
               <div className="text-slate-500 text-sm">{stat.label}</div>
             </motion.div>
           ))}
