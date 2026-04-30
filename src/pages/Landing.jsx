@@ -119,16 +119,7 @@ export default function Landing() {
             </div>
           </motion.div>
 
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-8 text-sm font-medium text-violet-300 border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm"
-          >
-            <Star className="w-3.5 h-3.5 fill-violet-300" />
-            Dream Analysis • Free to Start
-          </motion.div>
+
 
           {/* Headline */}
           <motion.h1
