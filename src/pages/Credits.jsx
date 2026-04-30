@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Sparkles, Moon, BookOpen, Flame, Gift, Star, Crown, Check, Zap } from 'lucide-react';
 import CreditBadge from '../components/ui/CreditBadge';
+import UpgradeButton from '../components/ui/UpgradeButton';
 import { cn } from "@/lib/utils";
 
 const tiers = [
@@ -16,7 +17,7 @@ const tiers = [
     price: '$0',
     color: 'from-slate-500 to-slate-600',
     features: [
-      '5 AI interpretations/month',
+      '9 AI interpretations (lifetime)',
       'Basic mood tracking',
       'Daily reflections',
       'Standard support',
@@ -25,7 +26,7 @@ const tiers = [
   {
     name: 'Dreamer',
     value: 'dreamer',
-    price: '$4.99/mo',
+    price: '$1.99/mo',
     color: 'from-indigo-500 to-purple-500',
     popular: true,
     features: [
@@ -39,7 +40,7 @@ const tiers = [
   {
     name: 'Visionary',
     value: 'visionary',
-    price: '$9.99/mo',
+    price: 'Coming soon',
     color: 'from-amber-500 to-orange-500',
     features: [
       'Everything in Dreamer',
@@ -61,6 +62,7 @@ const earnMethods = [
 
 export default function Credits() {
   const [user, setUser] = useState(null);
+  const upgraded = new URLSearchParams(window.location.search).get('upgraded') === 'true';
 
   useEffect(() => {
     base44.auth.me().then(setUser);
@@ -81,6 +83,13 @@ export default function Credits() {
   return (
     <div className="min-h-screen bg-[#03020a]">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
+        {/* Upgrade Success Banner */}
+        {upgraded && (
+          <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
+            <p className="text-emerald-700 font-semibold">🎉 Welcome to Dreamer! Your account has been upgraded.</p>
+          </div>
+        )}
+
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8 lg:mb-10">
           <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-amber-100 text-amber-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
@@ -183,17 +192,17 @@ export default function Credits() {
                         </li>
                       ))}
                     </ul>
-                    <Button 
-                      className={cn(
-                        "w-full",
-                        isCurrent 
-                          ? "bg-slate-200 text-slate-600 cursor-default" 
-                          : `bg-gradient-to-r ${tier.color} hover:opacity-90`
-                      )}
-                      disabled={isCurrent}
-                    >
-                      {isCurrent ? 'Current Plan' : tier.value === 'free' ? 'Downgrade' : 'Upgrade'}
-                    </Button>
+                    {isCurrent ? (
+                      <Button className="w-full bg-slate-200 text-slate-600 cursor-default" disabled>
+                        Current Plan
+                      </Button>
+                    ) : tier.value === 'dreamer' ? (
+                      <UpgradeButton className="w-full" />
+                    ) : tier.value === 'free' ? (
+                      <Button className="w-full" variant="outline" disabled>Downgrade</Button>
+                    ) : (
+                      <Button className="w-full" variant="outline" disabled>Coming Soon</Button>
+                    )}
                   </CardContent>
                 </Card>
               );
