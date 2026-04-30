@@ -219,7 +219,7 @@ export default function Landing() {
               Everything your mind needs
             </h2>
             <p className="text-slate-400 text-lg max-w-xl mx-auto">
-              Tools that feel as intuitive and fluid as dreaming itself.
+              Tools to help connect with your Higher Self...
             </p>
           </motion.div>
 
