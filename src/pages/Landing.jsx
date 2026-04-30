@@ -27,9 +27,9 @@ export default function Landing() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef });
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 0.6], [0, -80]);
+  const { scrollYProgress } = useScroll();
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.4], [0, -60]);
 
   useEffect(() => {
     base44.auth.isAuthenticated().then(setIsAuthenticated);
@@ -317,7 +317,7 @@ export default function Landing() {
           <div className="space-y-6">
             {[
               { step: '01', icon: Moon, title: 'Wake up & Record', desc: 'Capture your dream immediately — details, emotions, symbols — before they fade into morning light.' },
-              { step: '02', icon: Eye, title: 'Add your context', desc: 'Share what\'s happening in your life. Recent stress, major events, recurring feelings. The AI listens.' },
+              { step: '02', icon: Eye, title: 'Add your context', desc: 'Share what\'s stirring beneath the surface — recent events, recurring feelings, the symbols that follow you into sleep.' },
               { step: '03', icon: Zap, title: 'Receive deep insights', desc: 'Get a personalized, Jungian-inspired interpretation that connects your dreams to your waking life.' },
             ].map((item, i) => (
               <motion.div
