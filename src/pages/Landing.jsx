@@ -60,7 +60,7 @@ export default function Landing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}>
             
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-white/40 text-indigo-700 text-sm font-medium mb-8 shadow-lg">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-white/40 text-indigo-700 text-sm font-medium mb-8 shadow-lg hidden">
               <Sparkles className="w-4 h-4" />
               100% Ad-Free • Always Free to Start
             </div>
