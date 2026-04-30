@@ -94,7 +94,7 @@ export default function Landing() {
 
       {/* ── HERO ── */}
       <div ref={heroRef} className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
-        <motion.div style={{ opacity: heroOpacity, y: heroY }} className="w-full max-w-5xl mx-auto text-center">
+        <div className="w-full max-w-5xl mx-auto text-center">
 
           {/* Floating moon */}
           <motion.div
@@ -191,7 +191,7 @@ export default function Landing() {
               See how it works ↓
             </motion.button>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Scroll indicator */}
         <motion.div
