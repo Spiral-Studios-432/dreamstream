@@ -127,7 +127,7 @@ export default function Landing() {
             className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-8 text-sm font-medium text-violet-300 border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm"
           >
             <Star className="w-3.5 h-3.5 fill-violet-300" />
-            AI-Powered Dream Analysis • Free to Start
+            Dream Analysis • Free to Start
           </motion.div>
 
           {/* Headline */}
@@ -135,7 +135,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-5xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tight mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black leading-none tracking-tight mb-6"
           >
             <span className="block text-white">Unlock the</span>
             <span
