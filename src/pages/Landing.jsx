@@ -186,7 +186,7 @@ export default function Landing() {
       </div>
 
       {/* ── FEATURES ── */}
-      <div className="relative z-10 py-32 px-4">
+      <div className="relative z-10 py-40 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="text-center mb-20"
@@ -261,7 +261,7 @@ export default function Landing() {
       </div>
 
       {/* ── STATS BAND ── */}
-      <div className="relative z-10 py-16 px-4 border-y border-white/5">
+      <div className="relative z-10 py-24 px-4 border-y border-white/5">
         <div className="max-w-4xl mx-auto grid grid-cols-3 gap-3 sm:gap-8 text-center">
           {[
             { value: '10,000+', label: 'Dreams Logged' },
@@ -283,7 +283,7 @@ export default function Landing() {
       </div>
 
       {/* ── HOW IT WORKS ── */}
-      <div className="relative z-10 py-32 px-4">
+      <div className="relative z-10 py-40 px-4">
         <div className="max-w-4xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -324,7 +324,7 @@ export default function Landing() {
       </div>
 
       {/* ── FINAL CTA ── */}
-      <div className="relative z-10 py-24 px-4">
+      <div className="relative z-10 py-40 px-4">
         <motion.div
           className="max-w-3xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
