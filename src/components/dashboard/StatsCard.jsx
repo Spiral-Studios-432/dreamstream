@@ -10,8 +10,8 @@ export default function StatsCard({ title, value, subtitle, icon: Icon, gradient
       transition={{ type: "spring", stiffness: 300 }}
     >
       <Card className={cn(
-        "relative overflow-hidden p-5 sm:p-6 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300",
-        gradient || "bg-gradient-to-br from-white via-slate-50/50 to-white"
+        "relative overflow-hidden p-5 sm:p-6 border border-violet-100/60 shadow-md hover:shadow-lg transition-shadow duration-300",
+        gradient || "bg-gradient-to-br from-white via-violet-50/20 to-indigo-50/20"
       )}>
         <div className="absolute top-0 right-0 w-28 h-28 sm:w-36 sm:h-36 -mr-8 sm:-mr-10 -mt-8 sm:-mt-10 opacity-[0.07]">
           {Icon && <Icon className="w-full h-full" />}

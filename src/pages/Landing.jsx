@@ -1,25 +1,25 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Moon, Sparkles, BookOpen, ArrowRight, Star, Eye, Zap } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Moon, Sparkles, BookOpen, ArrowRight, Eye, Zap } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-const STARS = Array.from({ length: 120 }, (_, i) => ({
+const STARS = Array.from({ length: 90 }, (_, i) => ({
   id: i,
   x: Math.random() * 100,
   y: Math.random() * 100,
-  size: Math.random() * 2.5 + 0.5,
-  duration: Math.random() * 4 + 2,
+  size: Math.random() * 2 + 0.5,
+  duration: Math.random() * 4 + 3,
   delay: Math.random() * 5,
 }));
 
 const ORBS = [
-  { color: '#6366f1', x: '10%', y: '20%', size: 500, blur: 140, opacity: 0.18 },
-  { color: '#a855f7', x: '70%', y: '10%', size: 400, blur: 120, opacity: 0.15 },
-  { color: '#ec4899', x: '50%', y: '60%', size: 600, blur: 160, opacity: 0.12 },
-  { color: '#3b82f6', x: '85%', y: '70%', size: 350, blur: 110, opacity: 0.14 },
-  { color: '#8b5cf6', x: '20%', y: '80%', size: 450, blur: 130, opacity: 0.13 },
+  { color: '#7c6af7', x: '10%', y: '20%', size: 480, blur: 140, opacity: 0.14 },
+  { color: '#a78bfa', x: '72%', y: '12%', size: 380, blur: 120, opacity: 0.12 },
+  { color: '#c084fc', x: '50%', y: '60%', size: 560, blur: 160, opacity: 0.10 },
+  { color: '#818cf8', x: '85%', y: '72%', size: 320, blur: 110, opacity: 0.11 },
+  { color: '#9d6fd4', x: '18%', y: '80%', size: 420, blur: 130, opacity: 0.10 },
 ];
 
 export default function Landing() {
@@ -39,134 +39,117 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-[#03020a] overflow-hidden text-white">
+    <div className="min-h-screen bg-[#06040f] overflow-hidden text-white">
 
-      {/* ── NEBULA BACKGROUND ── */}
+      {/* ── BACKGROUND ── */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {ORBS.map((orb, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full"
             style={{
-              left: orb.x,
-              top: orb.y,
-              width: orb.size,
-              height: orb.size,
+              left: orb.x, top: orb.y,
+              width: orb.size, height: orb.size,
               background: orb.color,
               filter: `blur(${orb.blur}px)`,
               opacity: orb.opacity,
               transform: 'translate(-50%, -50%)',
             }}
-            animate={{ scale: [1, 1.15, 1], opacity: [orb.opacity, orb.opacity * 1.4, orb.opacity] }}
-            transition={{ duration: 10 + i * 3, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{ scale: [1, 1.12, 1], opacity: [orb.opacity, orb.opacity * 1.3, orb.opacity] }}
+            transition={{ duration: 12 + i * 3, repeat: Infinity, ease: 'easeInOut' }}
           />
         ))}
-
-        {/* Star field */}
         {STARS.map((star) => (
           <motion.div
             key={star.id}
             className="absolute rounded-full bg-white"
-            style={{
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-              width: star.size,
-              height: star.size,
-            }}
-            animate={{ opacity: [0.2, 1, 0.2], scale: [1, 1.3, 1] }}
+            style={{ left: `${star.x}%`, top: `${star.y}%`, width: star.size, height: star.size }}
+            animate={{ opacity: [0.15, 0.8, 0.15] }}
             transition={{ duration: star.duration, delay: star.delay, repeat: Infinity, ease: 'easeInOut' }}
           />
         ))}
-
-        {/* Milky way band */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(105deg, transparent 30%, rgba(139,92,246,0.04) 50%, transparent 70%)',
-          }}
-        />
       </div>
 
       {/* ── HERO ── */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
-        <div className="w-full max-w-5xl mx-auto text-center">
+        <div className="w-full max-w-4xl mx-auto text-center">
 
-          {/* Floating moon */}
+          {/* Moon */}
           <motion.div
-            className="mx-auto mb-10 relative w-32 h-32"
-            animate={{ y: [0, -18, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            className="mx-auto mb-10 relative w-28 h-28"
+            animate={{ y: [0, -14, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
           >
-            {[1, 2, 3].map((ring) => (
+            {[1, 2].map((ring) => (
               <motion.div
                 key={ring}
-                className="absolute rounded-full border border-violet-400/20"
-                style={{ inset: `-${ring * 14}px` }}
-                animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.04, 1] }}
-                transition={{ duration: 3 + ring, repeat: Infinity, ease: 'easeInOut', delay: ring * 0.4 }}
+                className="absolute rounded-full border border-violet-300/15"
+                style={{ inset: `-${ring * 16}px` }}
+                animate={{ opacity: [0.2, 0.5, 0.2] }}
+                transition={{ duration: 4 + ring, repeat: Infinity, ease: 'easeInOut', delay: ring * 0.5 }}
               />
             ))}
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-violet-300 via-purple-400 to-indigo-600 shadow-2xl shadow-violet-500/60 flex items-center justify-center">
-              <Moon className="w-16 h-16 text-white drop-shadow-lg" />
+            <div className="w-28 h-28 rounded-full bg-gradient-to-br from-violet-300 via-purple-400 to-indigo-500 shadow-2xl shadow-violet-500/50 flex items-center justify-center">
+              <Moon className="w-14 h-14 text-white drop-shadow-lg" />
             </div>
           </motion.div>
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight mb-6 px-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-snug tracking-tight mb-5 px-4"
           >
-            <span className="block text-white">Unlock the</span>
+            <span className="block text-white/90">Your dreams have something</span>
             <span
-              className="block"
+              className="block mt-1"
               style={{
-                background: 'linear-gradient(135deg, #c084fc 0%, #818cf8 40%, #60a5fa 70%, #f472b6 100%)',
+                background: 'linear-gradient(135deg, #c4b5fd 0%, #a5b4fc 45%, #93c5fd 75%, #e879f9 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}
             >
-              Language of Dreams
+              beautiful to tell you.
             </span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4 }}
-            className="text-lg sm:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg text-slate-300/80 mb-10 max-w-xl mx-auto leading-relaxed"
           >
-            Capture the whispers of your sleeping mind,
-            decode symbols, and discover what your subconscious has been trying to tell you.
+            A gentle place to capture, understand, and grow from the stories your sleeping mind weaves each night.
+            No pressure — just quiet, meaningful reflection.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <motion.button
               onClick={handleGetStarted}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="relative group px-10 py-4 rounded-2xl text-lg font-bold text-white overflow-hidden shadow-2xl shadow-violet-500/40"
+              className="relative group px-9 py-4 rounded-2xl text-base font-semibold text-white overflow-hidden shadow-xl shadow-violet-600/30"
               style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #a855f7)' }}
             >
               <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative flex items-center gap-2">
                 Begin Your Journey
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4" />
               </span>
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.03 }}
-              className="px-8 py-4 rounded-2xl text-base font-medium text-slate-300 border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
+              whileHover={{ scale: 1.02 }}
+              className="px-7 py-4 rounded-2xl text-sm font-medium text-slate-300/80 border border-white/10 bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] transition-all duration-300"
               onClick={handleGetStarted}
             >
               See how it works ↓
@@ -174,148 +157,144 @@ export default function Landing() {
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 text-xs tracking-widest uppercase"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500/70 text-xs tracking-widest uppercase"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 3, repeat: Infinity }}
         >
-          <span>Scroll</span>
-          <div className="w-px h-10 bg-gradient-to-b from-slate-500 to-transparent" />
+          <span>Explore</span>
+          <div className="w-px h-8 bg-gradient-to-b from-slate-500/50 to-transparent" />
         </motion.div>
       </div>
 
       {/* ── FEATURES ── */}
-      <div className="relative z-10 py-40 px-4">
-        <div className="max-w-6xl mx-auto">
+      <div className="relative z-10 py-32 px-4">
+        <div className="max-w-5xl mx-auto">
           <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-violet-400 font-semibold text-sm tracking-widest uppercase mb-4">Your Dream Toolkit</p>
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-              Everything your mind needs
+            <p className="text-violet-300/70 font-medium text-xs tracking-widest uppercase mb-3">Everything you need</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white/90 mb-3">
+              A cosy toolkit for your inner world
             </h2>
-            <p className="text-slate-400 text-lg max-w-xl mx-auto">
-              Tools to help connect with your Higher Self...
+            <p className="text-slate-400/80 text-base max-w-lg mx-auto leading-relaxed">
+              Thoughtfully designed to feel like a warm bedside journal — not a clinical app.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               {
                 icon: Moon,
                 title: 'Dream Journal',
-                description: 'Capture every detail — vivid, lucid, or fleeting — with mood tracking, tags, and rich sensory notes.',
-                gradient: 'from-indigo-500 to-violet-600',
-                glow: 'shadow-indigo-500/30',
+                description: 'Jot down every whisper of your dream before it slips away — moods, symbols, feelings and all.',
                 border: 'border-indigo-500/20',
-                bg: 'bg-indigo-500/5',
+                bg: 'bg-indigo-500/[0.06]',
+                gradient: 'from-indigo-400 to-violet-500',
               },
               {
                 icon: Sparkles,
-                title: 'Dream Interpretation',
-                description: 'Get deep Jungian-inspired analyses personalized to your life, symbols, and emotional landscape.',
-                gradient: 'from-violet-500 to-pink-500',
-                glow: 'shadow-violet-500/30',
-                border: 'border-violet-500/20',
-                bg: 'bg-violet-500/5',
+                title: 'Gentle Interpretations',
+                description: 'Soft, Jungian-inspired insights that help you see yourself with more kindness and curiosity.',
+                border: 'border-violet-500/25',
+                bg: 'bg-violet-500/[0.08]',
+                gradient: 'from-violet-400 to-purple-500',
                 featured: true,
               },
               {
                 icon: BookOpen,
                 title: 'Daily Reflections',
-                description: 'Guided mindfulness prompts that bridge your waking and dreaming worlds every single day.',
-                gradient: 'from-pink-500 to-amber-500',
-                glow: 'shadow-pink-500/30',
-                border: 'border-pink-500/20',
-                bg: 'bg-pink-500/5',
+                description: 'Short, calming prompts that gently bridge your waking and dreaming life each morning.',
+                border: 'border-purple-500/20',
+                bg: 'bg-purple-500/[0.06]',
+                gradient: 'from-purple-400 to-pink-500',
               },
             ].map((feature, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.15 }}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className={`relative rounded-3xl p-8 border ${feature.border} ${feature.bg} backdrop-blur-sm ${feature.featured ? `shadow-2xl ${feature.glow}` : ''}`}
+                transition={{ duration: 0.6, delay: i * 0.12 }}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className={`relative rounded-2xl p-7 border ${feature.border} ${feature.bg} backdrop-blur-sm`}
               >
                 {feature.featured && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-violet-500 to-pink-500 text-white shadow-lg">
-                    Most Popular
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg">
+                    Most Loved
                   </div>
                 )}
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-6 shadow-lg`}>
-                  <feature.icon className="w-7 h-7 text-white" />
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-5 shadow-lg`}>
+                  <feature.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                <p className="text-slate-400 leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg font-semibold text-white/90 mb-2">{feature.title}</h3>
+                <p className="text-slate-400/80 text-sm leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* ── STATS BAND ── */}
-      <div className="relative z-10 py-24 px-4 border-y border-white/5">
-        <div className="max-w-4xl mx-auto grid grid-cols-3 gap-3 sm:gap-8 text-center">
+      {/* ── STATS ── */}
+      <div className="relative z-10 py-20 px-4 border-y border-white/[0.05]">
+        <div className="max-w-3xl mx-auto grid grid-cols-3 gap-4 sm:gap-8 text-center">
           {[
-            { value: '10,000+', label: 'Dreams Logged' },
+            { value: '10,000+', label: 'Dreams Captured' },
             { value: '98%', label: 'Feel More Self-Aware' },
-            { value: '∞', label: 'Insights Waiting' },
+            { value: '∞', label: 'Insights Waiting for You' },
           ].map((stat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
+              transition={{ delay: i * 0.12 }}
             >
-              <div className="text-2xl sm:text-5xl font-black bg-gradient-to-r from-violet-300 to-indigo-300 bg-clip-text text-transparent mb-2">{stat.value}</div>
-              <div className="text-slate-500 text-sm">{stat.label}</div>
+              <div className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 to-indigo-300 bg-clip-text text-transparent mb-1">{stat.value}</div>
+              <div className="text-slate-500/80 text-xs sm:text-sm">{stat.label}</div>
             </motion.div>
           ))}
         </div>
       </div>
 
       {/* ── HOW IT WORKS ── */}
-      <div className="relative z-10 py-40 px-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="relative z-10 py-32 px-4">
+        <div className="max-w-3xl mx-auto">
           <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-center mb-14"
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-violet-400 font-semibold text-sm tracking-widest uppercase mb-4">The Process</p>
-            <h2 className="text-4xl sm:text-5xl font-black text-white">Simple as dreaming</h2>
+            <p className="text-violet-300/70 font-medium text-xs tracking-widest uppercase mb-3">How it works</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white/90">As easy as writing in a diary</h2>
           </motion.div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {[
-              { step: '01', icon: Moon, title: 'Wake up & Record', desc: 'Capture your dream immediately — details, emotions, symbols — before they fade into morning light.' },
-              { step: '02', icon: Eye, title: 'Add your context', desc: "Share what's happening in your life. Recent stress, major events, recurring feelings." },
-              { step: '03', icon: Zap, title: 'Receive deep insights', desc: 'Get a personalized, Jungian-inspired interpretation that connects your dreams to your waking life.' },
+              { step: '01', icon: Moon, title: 'Wake up & write it down', desc: 'Capture whatever you remember — even fragments are worth keeping. Details, feelings, colours, anything.' },
+              { step: '02', icon: Eye, title: 'Add a little context', desc: "A few words about your day or how you've been feeling helps the interpretation feel personal to you." },
+              { step: '03', icon: Zap, title: 'Receive a thoughtful insight', desc: 'A warm, personalised reflection that connects the dots between your dreams and your waking life.' },
             ].map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -24 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="flex gap-6 items-start p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
+                transition={{ duration: 0.6, delay: i * 0.12 }}
+                className="flex gap-5 items-start p-6 rounded-2xl border border-white/[0.06] bg-white/[0.025] hover:bg-white/[0.04] transition-colors"
               >
-                <div className="text-5xl font-black text-white/5 leading-none w-16 flex-shrink-0 select-none">{item.step}</div>
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-violet-500/30">
-                  <item.icon className="w-6 h-6 text-white" />
+                <div className="text-4xl font-bold text-white/[0.06] leading-none w-12 flex-shrink-0 select-none">{item.step}</div>
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center flex-shrink-0 shadow-md shadow-violet-500/20">
+                  <item.icon className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-1">{item.title}</h3>
-                  <p className="text-slate-400 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-base font-semibold text-white/90 mb-1">{item.title}</h3>
+                  <p className="text-slate-400/80 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -324,48 +303,53 @@ export default function Landing() {
       </div>
 
       {/* ── FINAL CTA ── */}
-      <div className="relative z-10 py-40 px-4">
+      <div className="relative z-10 py-32 px-4">
         <motion.div
-          className="max-w-3xl mx-auto text-center"
-          initial={{ opacity: 0, y: 30 }}
+          className="max-w-2xl mx-auto text-center"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
         >
-          <div className="relative rounded-3xl overflow-hidden p-8 sm:p-16"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.3) 0%, rgba(99,102,241,0.2) 50%, rgba(168,85,247,0.3) 100%)', border: '1px solid rgba(139,92,246,0.3)', backdropFilter: 'blur(20px)' }}
+          <div
+            className="relative rounded-3xl overflow-hidden p-10 sm:p-16"
+            style={{
+              background: 'linear-gradient(135deg, rgba(109,40,217,0.25) 0%, rgba(99,102,241,0.15) 50%, rgba(147,51,234,0.25) 100%)',
+              border: '1px solid rgba(167,139,250,0.2)',
+              backdropFilter: 'blur(24px)',
+            }}
           >
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-violet-600/10 rounded-full blur-3xl" />
             </div>
 
             <motion.div
-              animate={{ rotate: [0, 10, -10, 0], y: [0, -8, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="text-6xl mb-6"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              className="text-5xl mb-6"
             >
               🌙
             </motion.div>
 
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-              Your dreams are waiting.
+            <h2 className="text-3xl sm:text-4xl font-bold text-white/90 mb-3">
+              Your next dream is already on its way.
             </h2>
-            <p className="text-slate-300 text-lg mb-10 max-w-lg mx-auto">
-              Every night is a new chapter. Start capturing yours tonight — it's completely free.
+            <p className="text-slate-300/70 text-base mb-10 max-w-md mx-auto leading-relaxed">
+              Start your journal tonight — it's free, it's gentle, and it just might surprise you.
             </p>
 
             <motion.button
               onClick={handleGetStarted}
-              whileHover={{ scale: 1.06 }}
+              whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="px-12 py-5 rounded-2xl text-lg font-black text-white shadow-2xl shadow-violet-500/50 relative overflow-hidden group"
+              className="px-10 py-4 rounded-2xl text-base font-semibold text-white shadow-xl shadow-violet-500/30 relative overflow-hidden group"
               style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #a855f7)' }}
             >
               <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
-              <span className="relative flex items-center gap-3">
-                <Sparkles className="w-5 h-5" />
+              <span className="relative flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
                 Start Dreaming Free
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4" />
               </span>
             </motion.button>
           </div>
@@ -373,21 +357,15 @@ export default function Landing() {
       </div>
 
       {/* ── FOOTER ── */}
-      <div className="relative z-10 py-10 px-4 border-t border-white/5">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-sm">
-          <div className="flex items-center gap-2 font-bold text-white/70">
-            <Moon className="w-5 h-5 text-violet-400" />
-            <span
-              style={{
-                background: 'linear-gradient(90deg, #c084fc, #818cf8)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
+      <div className="relative z-10 py-8 px-4 border-t border-white/[0.05]">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500/60 text-sm">
+          <div className="flex items-center gap-2 font-semibold text-white/50">
+            <Moon className="w-4 h-4 text-violet-400/70" />
+            <span style={{ background: 'linear-gradient(90deg, #c4b5fd, #a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               DreamStream
             </span>
           </div>
-          <p>© 2026 DreamStream. A space for your dreams.</p>
+          <p>© 2026 DreamStream · A quiet space for your dreams.</p>
         </div>
       </div>
     </div>

@@ -70,10 +70,10 @@ export default function Home() {
           className="flex flex-col gap-4 sm:gap-5 mb-8 sm:mb-10"
         >
           <div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-900 bg-clip-text text-transparent">
-              Welcome back{user?.full_name ? `, ${user.full_name.split(' ')[0]}` : ''}! ✨
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-indigo-700 via-purple-700 to-violet-700 bg-clip-text text-transparent">
+              Good to see you{user?.full_name ? `, ${user.full_name.split(' ')[0]}` : ''} 🌙
             </h1>
-            <p className="text-sm sm:text-base text-slate-600 mt-2 font-medium">Track your dreams and unlock your subconscious</p>
+            <p className="text-sm sm:text-base text-slate-500 mt-2">How did you sleep? Jot down whatever you remember — even the little bits matter.</p>
           </div>
           <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
             <CreditBadge credits={userCredits?.total_credits} size="default" />
@@ -97,20 +97,20 @@ export default function Home() {
             title="Dreams Logged"
             value={userCredits?.total_dreams_logged || 0}
             icon={Moon}
-            gradient="bg-gradient-to-br from-indigo-50 to-blue-50"
+            gradient="bg-gradient-to-br from-indigo-50/80 to-violet-50/60"
           />
           <StatsCard
             title="Reflections"
             value={userCredits?.total_reflections || 0}
             icon={BookOpen}
-            gradient="bg-gradient-to-br from-purple-50 to-pink-50"
+            gradient="bg-gradient-to-br from-violet-50/80 to-purple-50/60"
           />
           <StatsCard
             title="Your Tier"
             value={userCredits?.tier?.charAt(0).toUpperCase() + userCredits?.tier?.slice(1) || 'Free'}
             subtitle="Upgrade for more features"
             icon={TrendingUp}
-            gradient="bg-gradient-to-br from-amber-50 to-yellow-50"
+            gradient="bg-gradient-to-br from-purple-50/80 to-indigo-50/60"
           />
         </div>
 
@@ -130,23 +130,23 @@ export default function Home() {
             />
 
             {/* Quick Tips Card */}
-            <div className="mt-4 sm:mt-6 p-4 sm:p-5 rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100">
+            <div className="mt-4 sm:mt-6 p-4 sm:p-5 rounded-xl bg-gradient-to-br from-violet-50 to-indigo-50 border border-violet-100/60">
               <div className="flex items-center gap-2 mb-3">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
-                <h3 className="font-semibold text-sm sm:text-base text-slate-800">Pro Tips</h3>
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-violet-500" />
+                <h3 className="font-semibold text-sm sm:text-base text-slate-700">Little reminders</h3>
               </div>
               <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-amber-500 flex-shrink-0">•</span>
-                  <span>Log dreams immediately after waking for better recall</span>
+                  <span className="text-violet-400 flex-shrink-0">·</span>
+                  <span>Write down your dream the moment you wake — even a few words helps</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-amber-500 flex-shrink-0">•</span>
-                  <span>Track your mood to find patterns in your dreams</span>
+                  <span className="text-violet-400 flex-shrink-0">·</span>
+                  <span>Notice how you feel after waking — your mood tells a story too</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-amber-500 flex-shrink-0">•</span>
-                  <span>Use tags to organize and search your dreams later</span>
+                  <span className="text-violet-400 flex-shrink-0">·</span>
+                  <span>Tags make it easy to spot themes that keep coming back</span>
                 </li>
               </ul>
             </div>

@@ -11,7 +11,7 @@ export default function StreakCard({ streakDays, lastActivity }) {
       whileHover={{ y: -4, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <Card className="relative overflow-hidden p-5 sm:p-6 border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br from-orange-500 via-rose-500 to-pink-500 text-white">
+      <Card className="relative overflow-hidden p-5 sm:p-6 border border-violet-300/20 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-violet-600 via-indigo-600 to-purple-600 text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
         <div className="absolute top-0 right-0 w-40 h-40 -mr-10 -mt-10">
           <div className="relative w-full h-full">
