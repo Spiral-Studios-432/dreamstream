@@ -22,8 +22,12 @@ export default function Home() {
   }, []);
 
   const { data: dreams = [] } = useQuery({
-    queryKey: ['dreams'],
-    queryFn: () => base44.entities.Dream.list('-dream_date', 10),
+    queryKey: ['dreams', user?.email],
+    queryFn: async () => {
+      if (!user?.email) return [];
+      return base44.entities.Dream.filter({ created_by: user.email }, '-dream_date', 10);
+    },
+    enabled: !!user?.email,
   });
 
   const { data: userCredits } = useQuery({
