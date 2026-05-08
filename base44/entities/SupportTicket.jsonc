@@ -51,5 +51,10 @@
     "subject",
     "message",
     "category"
-  ]
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    }
+  }
 }
