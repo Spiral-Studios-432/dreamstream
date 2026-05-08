@@ -58,62 +58,62 @@ export default function Reflections() {
 
   return (
     <div className="min-h-screen bg-[#03020a]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
+        <div className="flex items-center gap-3 mb-5 sm:mb-8">
           <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg shadow-purple-200">
-            <BookOpen className="w-6 h-6 text-white" />
+            <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">Reflections</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Reflections</h1>
             <p className="text-slate-600 text-sm">{reflections.length} reflections completed</p>
           </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-5 sm:mb-8">
           <Card className="border-0 shadow-md">
-            <CardContent className="p-5">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-purple-100">
-                  <BookOpen className="w-5 h-5 text-purple-600" />
+            <CardContent className="p-3 sm:p-5">
+              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-3 text-center sm:text-left">
+                <div className="p-2 sm:p-2.5 rounded-xl bg-purple-100">
+                  <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500">Total Reflections</p>
-                  <p className="text-2xl font-bold text-slate-900">{reflections.length}</p>
+                  <p className="text-xs text-slate-500">Reflections</p>
+                  <p className="text-xl sm:text-2xl font-bold text-slate-900">{reflections.length}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
           <Card className="border-0 shadow-md">
-            <CardContent className="p-5">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-amber-100">
-                  <Sparkles className="w-5 h-5 text-amber-600" />
+            <CardContent className="p-3 sm:p-5">
+              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-3 text-center sm:text-left">
+                <div className="p-2 sm:p-2.5 rounded-xl bg-amber-100">
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500">Credits Earned</p>
-                  <p className="text-2xl font-bold text-slate-900">{totalCreditsEarned}</p>
+                  <p className="text-xs text-slate-500">Credits</p>
+                  <p className="text-xl sm:text-2xl font-bold text-slate-900">{totalCreditsEarned}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
           <Card className="border-0 shadow-md">
-            <CardContent className="p-5">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-orange-100">
-                  <Calendar className="w-5 h-5 text-orange-600" />
+            <CardContent className="p-3 sm:p-5">
+              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-3 text-center sm:text-left">
+                <div className="p-2 sm:p-2.5 rounded-xl bg-orange-100">
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500">Current Streak</p>
-                  <p className="text-2xl font-bold text-slate-900">{currentStreak} days</p>
+                  <p className="text-xs text-slate-500">Streak</p>
+                  <p className="text-xl sm:text-2xl font-bold text-slate-900">{currentStreak}d</p>
                 </div>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Calendar */}
           <Card className="border-0 shadow-lg">
             <CardHeader className="border-b">
@@ -186,16 +186,16 @@ export default function Reflections() {
                 {format(selectedDate, 'MMMM d, yyyy')}
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               {selectedReflection ? (
                 <div className="space-y-4">
                   <div>
                     <p className="text-sm font-medium text-slate-500 mb-2">Prompt</p>
-                    <p className="text-slate-800 font-medium">{selectedReflection.prompt}</p>
+                    <p className="text-slate-800 font-medium text-sm sm:text-base">{selectedReflection.prompt}</p>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-500 mb-2">Your Response</p>
-                    <p className="text-slate-700 whitespace-pre-wrap bg-slate-50 p-4 rounded-xl">
+                    <p className="text-slate-700 whitespace-pre-wrap bg-slate-50 p-3 sm:p-4 rounded-xl text-sm sm:text-base">
                       {selectedReflection.response}
                     </p>
                   </div>

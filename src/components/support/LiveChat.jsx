@@ -57,15 +57,15 @@ Provide a helpful, concise, and friendly response. If you don't know something s
   };
 
   return (
-    <Card className="border-0 shadow-lg flex flex-col h-[500px]">
-      <CardHeader className="border-b bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-t-lg">
-        <CardTitle className="text-lg flex items-center gap-2">
-          <MessageCircle className="w-5 h-5" />
+    <Card className="border-0 shadow-lg flex flex-col h-[420px] sm:h-[500px]">
+      <CardHeader className="border-b bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-t-lg px-4 py-3">
+        <CardTitle className="text-sm sm:text-base flex items-center gap-2">
+          <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
           Live Chat Support
-          <span className="ml-auto text-xs bg-white/20 px-2 py-1 rounded-full">AI Powered</span>
+          <span className="ml-auto text-xs bg-white/20 px-2 py-0.5 rounded-full">AI Powered</span>
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 overflow-y-auto p-4 space-y-4">
+      <CardContent className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
         {messages.map((msg, i) => (
           <div 
             key={i}
@@ -78,7 +78,7 @@ Provide a helpful, concise, and friendly response. If you don't know something s
             }`}>
               {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
             </div>
-            <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
+            <div className={`max-w-[85%] rounded-2xl px-3 py-2 sm:px-4 sm:py-2.5 ${
               msg.role === 'user'
                 ? 'bg-indigo-600 text-white rounded-tr-none'
                 : 'bg-slate-100 text-slate-800 rounded-tl-none'

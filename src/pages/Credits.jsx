@@ -212,7 +212,7 @@ export default function Credits() {
 
         {/* No Ads Promise */}
         <Card className="border-0 shadow-lg bg-gradient-to-r from-emerald-50 to-teal-50">
-          <CardContent className="p-8 text-center">
+          <CardContent className="p-5 sm:p-8 text-center">
             <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
               <Check className="w-8 h-8 text-emerald-600" />
             </div>

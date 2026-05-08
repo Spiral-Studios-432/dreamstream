@@ -42,7 +42,7 @@ export default function TicketForm({ onSuccess }) {
   if (submitted) {
     return (
       <Card className="border-0 shadow-lg bg-gradient-to-br from-emerald-50 to-teal-50">
-        <CardContent className="p-8 text-center">
+        <CardContent className="p-5 sm:p-8 text-center">
           <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="w-8 h-8 text-emerald-600" />
           </div>
@@ -66,13 +66,13 @@ export default function TicketForm({ onSuccess }) {
 
   return (
     <Card className="border-0 shadow-lg">
-      <CardHeader>
-        <CardTitle className="text-lg flex items-center gap-2">
-          <Send className="w-5 h-5 text-indigo-600" />
+      <CardHeader className="px-4 sm:px-6">
+        <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+          <Send className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
           Submit a Support Ticket
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-4 sm:px-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="text-sm font-medium text-slate-700 mb-1.5 block">Category</label>
