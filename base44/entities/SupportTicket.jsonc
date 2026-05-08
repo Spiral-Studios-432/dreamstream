@@ -1,0 +1,55 @@
+{
+  "name": "SupportTicket",
+  "type": "object",
+  "properties": {
+    "subject": {
+      "type": "string",
+      "description": "Subject of the ticket"
+    },
+    "message": {
+      "type": "string",
+      "description": "User's message"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "technical",
+        "account",
+        "billing",
+        "feature_request",
+        "other"
+      ],
+      "description": "Category of support request"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "in_progress",
+        "resolved",
+        "closed"
+      ],
+      "default": "open",
+      "description": "Ticket status"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "medium",
+      "description": "Ticket priority"
+    },
+    "admin_response": {
+      "type": "string",
+      "description": "Response from support team"
+    }
+  },
+  "required": [
+    "subject",
+    "message",
+    "category"
+  ]
+}

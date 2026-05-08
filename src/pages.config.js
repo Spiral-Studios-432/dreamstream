@@ -54,6 +54,7 @@ import Landing from './pages/Landing';
 import Reflections from './pages/Reflections';
 import Support from './pages/Support';
 import Admin from './pages/Admin';
+import Store from './pages/Store';
 import __Layout from './Layout.jsx';
 
 
@@ -65,6 +66,7 @@ export const PAGES = {
     "Reflections": Reflections,
     "Support": Support,
     "Admin": Admin,
+    "Store": Store,
 }
 
 export const pagesConfig = {

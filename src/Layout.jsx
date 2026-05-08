@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Button } from "@/components/ui/button";
 import { 
-  Home, Moon, BookOpen, HelpCircle, Sparkles, Menu, X, LogOut, User, ChevronRight
+  Home, Moon, BookOpen, HelpCircle, Sparkles, Menu, X, LogOut, User, ChevronRight, ShoppingBag
 } from 'lucide-react';
 import CreditBadge from './components/ui/CreditBadge';
 import { cn } from "@/lib/utils";
@@ -15,6 +15,7 @@ const navItems = [
   { name: 'Home', icon: Home, page: 'Home' },
   { name: 'Dreams', icon: Moon, page: 'Dreams' },
   { name: 'Reflections', icon: BookOpen, page: 'Reflections' },
+  { name: 'Store', icon: ShoppingBag, page: 'Store' },
   { name: 'Credits', icon: Sparkles, page: 'Credits' },
   { name: 'Support', icon: HelpCircle, page: 'Support' },
 ];

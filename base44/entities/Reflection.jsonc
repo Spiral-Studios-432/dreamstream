@@ -1,0 +1,41 @@
+{
+  "name": "Reflection",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "The reflection prompt"
+    },
+    "response": {
+      "type": "string",
+      "description": "User's reflection response"
+    },
+    "mood": {
+      "type": "string",
+      "enum": [
+        "grateful",
+        "hopeful",
+        "peaceful",
+        "motivated",
+        "reflective",
+        "curious"
+      ],
+      "description": "Mood during reflection"
+    },
+    "reflection_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of reflection"
+    },
+    "credits_earned": {
+      "type": "number",
+      "default": 5,
+      "description": "Credits earned for completing"
+    }
+  },
+  "required": [
+    "prompt",
+    "response",
+    "reflection_date"
+  ]
+}
