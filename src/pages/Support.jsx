@@ -49,7 +49,7 @@ export default function Support() {
           </TabsContent>
 
           <TabsContent value="ticket" className="mt-6">
-            <div className="max-w-xl mx-auto">
+            <div className="max-w-xl mx-auto pb-16 sm:pb-8">
               <TicketForm />
             </div>
           </TabsContent>

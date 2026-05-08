@@ -116,10 +116,11 @@ export default function TicketForm({ onSuccess }) {
           <Button 
             type="submit" 
             disabled={submitting}
-            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 mb-2"
           >
             {submitting ? 'Submitting...' : 'Submit Ticket'}
           </Button>
+          <p className="text-xs text-slate-400 text-center pb-1">We typically respond within 24 hours</p>
         </form>
       </CardContent>
     </Card>
