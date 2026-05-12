@@ -8,6 +8,7 @@ import { Moon, Plus, Search, Filter, X, Lock } from 'lucide-react';
 import DreamForm from '../components/dreams/DreamForm';
 import DreamCard from '../components/dreams/DreamCard';
 import UpgradePrompt from '../components/ui/UpgradePrompt';
+import ExportMenu from '../components/dreams/ExportMenu';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const FREE_DREAM_LIMIT = 9;
@@ -115,7 +116,7 @@ export default function Dreams() {
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col gap-4 sm:gap-5 mb-6 sm:mb-8"
         >
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 flex-1">
             <motion.div 
               whileHover={{ rotate: 360, scale: 1.1 }}
               transition={{ duration: 0.5 }}
@@ -123,10 +124,11 @@ export default function Dreams() {
             >
               <Moon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
             </motion.div>
-            <div>
+            <div className="flex-1 min-w-0">
               <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">Dream Journal</h1>
               <p className="text-sm sm:text-base text-slate-600 font-medium">{dreams.length} dreams recorded</p>
             </div>
+            <ExportMenu dreams={filteredDreams} />
           </div>
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Button 
