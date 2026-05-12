@@ -204,8 +204,10 @@ export default function Layout({ children, currentPageName }) {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-auto">
-          {children}
+        <main className="flex-1 overflow-auto pb-safe">
+          <div className="pb-6">
+            {children}
+          </div>
         </main>
       </div>
     </div>

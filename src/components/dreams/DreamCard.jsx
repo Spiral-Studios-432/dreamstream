@@ -37,70 +37,54 @@ export default function DreamCard({ dream, onEdit, onDelete, expanded, onToggle 
       )}>
         <CardContent className="p-0">
           <div 
-            className="p-6 cursor-pointer bg-gradient-to-br from-white to-slate-50/30"
+            className="p-4 sm:p-6 cursor-pointer bg-gradient-to-br from-white to-slate-50/30"
             onClick={onToggle}
           >
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <h3 className="font-bold text-xl text-slate-900">{dream.title}</h3>
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex-1 min-w-0 pr-2">
+              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                <h3 className="font-bold text-base sm:text-xl text-slate-900 leading-tight">{dream.title}</h3>
                 {dream.dream_type && (
-                  <Badge className={cn("text-xs font-semibold shadow-sm", dreamTypeColors[dream.dream_type])}>
+                  <Badge className={cn("text-xs font-semibold shadow-sm flex-shrink-0", dreamTypeColors[dream.dream_type])}>
                     {dream.dream_type}
                   </Badge>
                 )}
               </div>
-              <p className="text-sm text-slate-600 font-medium">
-                {dream.dream_date && format(new Date(dream.dream_date), 'EEEE, MMMM d, yyyy')}
+              <p className="text-xs sm:text-sm text-slate-600 font-medium">
+                {dream.dream_date && format(new Date(dream.dream_date), 'EEE, MMM d, yyyy')}
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-0.5">
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="hidden sm:flex items-center gap-0.5">
                 {[...Array(dream.clarity_rating || 0)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <Star className="w-5 h-5 fill-amber-400 text-amber-400 drop-shadow" />
-                  </motion.div>
+                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                 ))}
               </div>
-              <motion.div
-                animate={{ rotate: expanded ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
+              <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
                 <ChevronDown className="w-5 h-5 text-slate-400" />
               </motion.div>
             </div>
           </div>
 
-          <p className={cn(
-            "text-slate-600 mb-4",
-            !expanded && "line-clamp-2"
-          )}>
+          <p className={cn("text-sm text-slate-600 mb-3", !expanded && "line-clamp-2")}>
             {dream.content}
           </p>
 
-          <div className="flex items-center gap-4 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="text-slate-500">Mood:</span>
-              <span className="flex items-center gap-1">
-                <span className="text-lg">{getMoodEmoji(dream.mood_before)}</span>
-                <span className="text-slate-400">→</span>
-                <span className="text-lg">{getMoodEmoji(dream.mood_after)}</span>
-              </span>
-            </div>
+          <div className="flex items-center gap-3 text-sm flex-wrap">
+            <span className="flex items-center gap-1">
+              <span className="text-base">{getMoodEmoji(dream.mood_before)}</span>
+              <span className="text-slate-400 text-xs">→</span>
+              <span className="text-base">{getMoodEmoji(dream.mood_after)}</span>
+            </span>
             {dream.tags?.length > 0 && (
               <div className="flex items-center gap-1 flex-wrap">
-                {dream.tags.slice(0, expanded ? undefined : 3).map(tag => (
+                {dream.tags.slice(0, expanded ? undefined : 2).map(tag => (
                   <span key={tag} className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs">
                     {tag}
                   </span>
                 ))}
-                {!expanded && dream.tags.length > 3 && (
-                  <span className="text-slate-400 text-xs">+{dream.tags.length - 3} more</span>
+                {!expanded && dream.tags.length > 2 && (
+                  <span className="text-slate-400 text-xs">+{dream.tags.length - 2}</span>
                 )}
               </div>
             )}
@@ -115,7 +99,7 @@ export default function DreamCard({ dream, onEdit, onDelete, expanded, onToggle 
             className="border-t border-slate-100"
           >
             {dream.interpretation && (
-              <div className="p-6 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+              <div className="p-4 sm:p-6 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
                 <div className="flex items-center gap-2 mb-3">
                   <motion.div
                     animate={{ rotate: [0, 10, -10, 0] }}
@@ -129,8 +113,8 @@ export default function DreamCard({ dream, onEdit, onDelete, expanded, onToggle 
               </div>
             )}
             
-            <div className="p-5 flex items-center justify-between bg-gradient-to-r from-slate-50 to-white">
-              <div className="flex items-center gap-4 text-sm font-medium text-slate-600">
+            <div className="p-4 sm:p-5 flex items-center justify-between bg-gradient-to-r from-slate-50 to-white flex-wrap gap-2">
+              <div className="flex items-center gap-3 text-xs sm:text-sm font-medium text-slate-600">
                 <span className="flex items-center gap-1.5">
                   <span className="text-indigo-600">💤</span> Sleep: {dream.sleep_quality}/5
                 </span>

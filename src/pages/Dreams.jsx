@@ -191,7 +191,7 @@ export default function Dreams() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto"
+              className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center sm:p-4 overflow-y-auto"
               onClick={() => setShowForm(false)}
             >
               <motion.div
@@ -199,7 +199,7 @@ export default function Dreams() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="w-full max-w-2xl my-4 sm:my-8"
+                className="w-full max-w-2xl sm:my-8"
               >
                 <DreamForm 
                   onClose={() => { setShowForm(false); setEditDream(null); }}

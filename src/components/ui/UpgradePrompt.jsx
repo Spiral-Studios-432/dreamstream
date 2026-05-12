@@ -41,18 +41,18 @@ export default function UpgradePrompt({ reason = 'dreams', onClose }) {
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         onClick={e => e.stopPropagation()}
-        className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden"
+        className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden max-h-[90vh] overflow-y-auto"
       >
-        <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-6 text-white text-center">
-          <Moon className="w-10 h-10 mx-auto mb-2 opacity-80" />
-          <h2 className="text-2xl font-bold mb-1">You've reached the free limit</h2>
+        <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-5 sm:p-6 text-white text-center">
+          <Moon className="w-8 h-8 mx-auto mb-2 opacity-80" />
+          <h2 className="text-xl sm:text-2xl font-bold mb-1">You've reached the free limit</h2>
           <p className="text-indigo-100 text-sm">
             {reason === 'dreams'
               ? 'Free accounts can log up to 9 dreams. Upgrade to continue your journey.'
               : 'This feature requires a premium plan.'}
           </p>
         </div>
-        <div className="p-6 space-y-4">
+        <div className="p-4 sm:p-6 space-y-4">
           {/* Dreamer */}
           <div className="border-2 border-indigo-500 rounded-xl p-4">
             <div className="flex items-center gap-2 mb-2">

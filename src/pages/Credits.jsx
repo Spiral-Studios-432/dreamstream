@@ -180,7 +180,7 @@ export default function Credits() {
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-3 sm:mb-4 flex items-center gap-2 px-1">
             <Crown className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" /> Choose Your Plan
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {tiers.map((tier) => {
               const isCurrent = tier.value === (userCredits?.tier || 'free');
               return (

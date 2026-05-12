@@ -115,7 +115,7 @@ Keep the tone warm, supportive, and insightful. Aim for 3-4 paragraphs total.`,
   };
 
   return (
-    <Card className="border-0 shadow-2xl max-w-2xl mx-auto max-h-[90vh] flex flex-col">
+    <Card className="border-0 shadow-2xl max-w-2xl mx-auto max-h-[95vh] sm:max-h-[90vh] flex flex-col rounded-b-none sm:rounded-2xl">
       <CardHeader className="border-b bg-gradient-to-r from-indigo-50 to-purple-50 p-4 sm:p-6 flex-shrink-0">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg sm:text-xl">

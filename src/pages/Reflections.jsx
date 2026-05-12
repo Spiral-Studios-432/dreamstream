@@ -113,7 +113,7 @@ export default function Reflections() {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {/* Calendar */}
           <Card className="border-0 shadow-lg">
             <CardHeader className="border-b">
@@ -158,8 +158,8 @@ export default function Reflections() {
                       key={day.toISOString()}
                       onClick={() => setSelectedDate(day)}
                       className={cn(
-                        "aspect-square rounded-lg text-sm font-medium transition-all",
-                        "hover:bg-slate-100",
+                        "aspect-square rounded-lg text-xs sm:text-sm font-medium transition-all min-h-[36px]",
+                        "hover:bg-slate-100 active:scale-95",
                         isSelected && "ring-2 ring-indigo-500",
                         isToday && !isSelected && "ring-2 ring-slate-300",
                         hasRef && "bg-gradient-to-br from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"

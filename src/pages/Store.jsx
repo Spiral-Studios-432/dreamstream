@@ -237,7 +237,7 @@ Make this feel like a special, magical gift. Warm, enchanting, and genuinely hel
         </motion.div>
 
         {/* Store Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {STORE_ITEMS.map((item, i) => {
             const Icon = item.icon;
             const isLoading = purchasing === item.id;
