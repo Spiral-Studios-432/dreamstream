@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Loader2 } from 'lucide-react';
 
-const PRICE_ID = 'price_1TRpN8CjunZHEao4Ty46pGuh';
+const PRICE_ID = 'price_1TWDrsGPm4SaQNfNwkHVxzWG';
 
 export default function UpgradeButton({ className = '' }) {
   const [loading, setLoading] = useState(false);
