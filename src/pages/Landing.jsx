@@ -71,12 +71,12 @@ export default function Landing() {
       </div>
 
       {/* ── HERO ── */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-5 pt-16 pb-24">
         <div className="w-full max-w-4xl mx-auto text-center">
 
           {/* Moon */}
           <motion.div
-            className="mx-auto mb-10 relative w-28 h-28"
+            className="mx-auto mb-7 sm:mb-10 relative w-20 h-20 sm:w-28 sm:h-28"
             animate={{ y: [0, -14, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
           >
@@ -89,8 +89,8 @@ export default function Landing() {
                 transition={{ duration: 4 + ring, repeat: Infinity, ease: 'easeInOut', delay: ring * 0.5 }}
               />
             ))}
-            <div className="w-28 h-28 rounded-full bg-gradient-to-br from-violet-300 via-purple-400 to-indigo-500 shadow-2xl shadow-violet-500/50 flex items-center justify-center">
-              <Moon className="w-14 h-14 text-white drop-shadow-lg" />
+            <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-violet-300 via-purple-400 to-indigo-500 shadow-2xl shadow-violet-500/50 flex items-center justify-center">
+              <Moon className="w-10 h-10 sm:w-14 sm:h-14 text-white drop-shadow-lg" />
             </div>
           </motion.div>
 
@@ -99,7 +99,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-snug tracking-tight mb-5 px-4"
+            className="text-2xl sm:text-4xl lg:text-5xl font-bold leading-snug tracking-tight mb-4 sm:mb-5 px-2"
           >
             <span className="block text-white/90">Your dreams have something</span>
             <span
@@ -120,7 +120,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4 }}
-            className="text-base sm:text-lg text-slate-300/80 mb-10 max-w-xl mx-auto leading-relaxed"
+            className="text-sm sm:text-lg text-slate-300/80 mb-8 sm:mb-10 max-w-xl mx-auto leading-relaxed px-2"
           >
             A gentle place to capture, understand, and grow from the stories your sleeping mind weaves each night.
             No pressure — just quiet, meaningful reflection.
@@ -131,13 +131,13 @@ export default function Landing() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full sm:w-auto"
           >
             <motion.button
               onClick={handleGetStarted}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="relative group px-9 py-4 rounded-2xl text-base font-semibold text-white overflow-hidden shadow-xl shadow-violet-600/30"
+              className="relative group w-full sm:w-auto px-9 py-4 rounded-2xl text-base font-semibold text-white overflow-hidden shadow-xl shadow-violet-600/30"
               style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #a855f7)' }}
             >
               <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -149,7 +149,7 @@ export default function Landing() {
 
             <motion.button
               whileHover={{ scale: 1.02 }}
-              className="px-7 py-4 rounded-2xl text-sm font-medium text-slate-300/80 border border-white/10 bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] transition-all duration-300"
+              className="w-full sm:w-auto px-7 py-4 rounded-2xl text-sm font-medium text-slate-300/80 border border-white/10 bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] transition-all duration-300"
               onClick={handleGetStarted}
             >
               See how it works ↓
@@ -168,7 +168,7 @@ export default function Landing() {
       </div>
 
       {/* ── FEATURES ── */}
-      <div className="relative z-10 py-32 px-4">
+      <div className="relative z-10 py-16 sm:py-32 px-5">
         <div className="max-w-5xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -178,7 +178,7 @@ export default function Landing() {
             transition={{ duration: 0.8 }}
           >
             <p className="text-violet-300/70 font-medium text-xs tracking-widest uppercase mb-3">Everything you need</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white/90 mb-3">
+            <h2 className="text-2xl sm:text-4xl font-bold text-white/90 mb-3">
               A cosy toolkit for your inner world
             </h2>
             <p className="text-slate-400/80 text-base max-w-lg mx-auto leading-relaxed">
@@ -186,7 +186,7 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
             {[
               {
                 icon: Moon,
@@ -221,7 +221,7 @@ export default function Landing() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.12 }}
                 whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                className={`relative rounded-2xl p-7 border ${feature.border} ${feature.bg} backdrop-blur-sm`}
+                className={`relative rounded-2xl p-5 sm:p-7 border ${feature.border} ${feature.bg} backdrop-blur-sm`}
               >
                 {feature.featured && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg">
@@ -240,8 +240,8 @@ export default function Landing() {
       </div>
 
       {/* ── STATS ── */}
-      <div className="relative z-10 py-20 px-4 border-y border-white/[0.05]">
-        <div className="max-w-3xl mx-auto grid grid-cols-3 gap-4 sm:gap-8 text-center">
+      <div className="relative z-10 py-12 sm:py-20 px-5 border-y border-white/[0.05]">
+        <div className="max-w-3xl mx-auto grid grid-cols-3 gap-3 sm:gap-8 text-center">
           {[
             { value: '10,000+', label: 'Dreams Captured' },
             { value: '98%', label: 'Feel More Self-Aware' },
@@ -254,15 +254,15 @@ export default function Landing() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
             >
-              <div className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 to-indigo-300 bg-clip-text text-transparent mb-1">{stat.value}</div>
-              <div className="text-slate-500/80 text-xs sm:text-sm">{stat.label}</div>
+              <div className="text-xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 to-indigo-300 bg-clip-text text-transparent mb-1">{stat.value}</div>
+              <div className="text-slate-500/80 text-[10px] sm:text-sm leading-tight">{stat.label}</div>
             </motion.div>
           ))}
         </div>
       </div>
 
       {/* ── HOW IT WORKS ── */}
-      <div className="relative z-10 py-32 px-4">
+      <div className="relative z-10 py-16 sm:py-32 px-5">
         <div className="max-w-3xl mx-auto">
           <motion.div
             className="text-center mb-14"
@@ -271,7 +271,7 @@ export default function Landing() {
             viewport={{ once: true }}
           >
             <p className="text-violet-300/70 font-medium text-xs tracking-widest uppercase mb-3">How it works</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white/90">As easy as writing in a diary</h2>
+            <h2 className="text-2xl sm:text-4xl font-bold text-white/90">As easy as writing in a diary</h2>
           </motion.div>
 
           <div className="space-y-4">
@@ -286,10 +286,10 @@ export default function Landing() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.12 }}
-                className="flex gap-5 items-start p-6 rounded-2xl border border-white/[0.06] bg-white/[0.025] hover:bg-white/[0.04] transition-colors"
+                className="flex gap-4 items-start p-5 sm:p-6 rounded-2xl border border-white/[0.06] bg-white/[0.025] hover:bg-white/[0.04] transition-colors"
               >
-                <div className="text-4xl font-bold text-white/[0.06] leading-none w-12 flex-shrink-0 select-none">{item.step}</div>
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center flex-shrink-0 shadow-md shadow-violet-500/20">
+                <div className="text-3xl sm:text-4xl font-bold text-white/[0.06] leading-none w-10 sm:w-12 flex-shrink-0 select-none">{item.step}</div>
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center flex-shrink-0 shadow-md shadow-violet-500/20">
                   <item.icon className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -303,7 +303,7 @@ export default function Landing() {
       </div>
 
       {/* ── FINAL CTA ── */}
-      <div className="relative z-10 py-32 px-4">
+      <div className="relative z-10 py-16 sm:py-32 px-5">
         <motion.div
           className="max-w-2xl mx-auto text-center"
           initial={{ opacity: 0, y: 24 }}
@@ -312,7 +312,7 @@ export default function Landing() {
           transition={{ duration: 0.9 }}
         >
           <div
-            className="relative rounded-3xl overflow-hidden p-10 sm:p-16"
+            className="relative rounded-3xl overflow-hidden p-8 sm:p-16"
             style={{
               background: 'linear-gradient(135deg, rgba(109,40,217,0.25) 0%, rgba(99,102,241,0.15) 50%, rgba(147,51,234,0.25) 100%)',
               border: '1px solid rgba(167,139,250,0.2)',
@@ -331,10 +331,10 @@ export default function Landing() {
               🌙
             </motion.div>
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-white/90 mb-3">
+            <h2 className="text-2xl sm:text-4xl font-bold text-white/90 mb-3">
               Your next dream is already on its way.
             </h2>
-            <p className="text-slate-300/70 text-base mb-10 max-w-md mx-auto leading-relaxed">
+            <p className="text-slate-300/70 text-sm sm:text-base mb-8 sm:mb-10 max-w-md mx-auto leading-relaxed">
               Start your journal tonight — it's free, it's gentle, and it just might surprise you.
             </p>
 
@@ -342,7 +342,7 @@ export default function Landing() {
               onClick={handleGetStarted}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="px-10 py-4 rounded-2xl text-base font-semibold text-white shadow-xl shadow-violet-500/30 relative overflow-hidden group"
+              className="w-full sm:w-auto px-10 py-4 rounded-2xl text-base font-semibold text-white shadow-xl shadow-violet-500/30 relative overflow-hidden group"
               style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #a855f7)' }}
             >
               <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
@@ -357,8 +357,8 @@ export default function Landing() {
       </div>
 
       {/* ── FOOTER ── */}
-      <div className="relative z-10 py-8 px-4 border-t border-white/[0.05]">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500/60 text-sm">
+      <div className="relative z-10 py-8 px-5 border-t border-white/[0.05]">
+        <div className="max-w-5xl mx-auto flex flex-col items-center sm:flex-row sm:justify-between gap-2 text-slate-500/60 text-xs sm:text-sm text-center">
           <div className="flex items-center gap-2 font-semibold text-white/50">
             <Moon className="w-4 h-4 text-violet-400/70" />
             <span style={{ background: 'linear-gradient(90deg, #c4b5fd, #a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
