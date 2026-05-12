@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import { moods } from '../ui/MoodSelector';
 import { cn } from "@/lib/utils";
 import { motion } from 'framer-motion';
+import ShareDreamButton from './ShareDreamButton';
 
 const dreamTypeColors = {
   normal: 'bg-slate-50 text-slate-700 border-slate-200',
@@ -123,6 +124,7 @@ export default function DreamCard({ dream, onEdit, onDelete, expanded, onToggle 
                 </span>
               </div>
               <div className="flex items-center gap-2">
+                <ShareDreamButton dream={dream} />
                 <Button 
                   variant="ghost" 
                   size="sm" 
