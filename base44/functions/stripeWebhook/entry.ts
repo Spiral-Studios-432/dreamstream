@@ -25,16 +25,19 @@ Deno.serve(async (req) => {
 
       if (userEmail) {
         const credits = await base44.asServiceRole.entities.UserCredits.filter({ user_email: userEmail });
+        // Determine tier from price ID
+        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 1 });
+        const priceId = lineItems.data[0]?.price?.id;
+        const tier = priceId === 'price_1TWESDGPm4SaQNfNoGITn8lJ' ? 'visionary' : 'dreamer';
+
         if (credits.length > 0) {
-          await base44.asServiceRole.entities.UserCredits.update(credits[0].id, {
-            tier: 'dreamer',
-          });
-          console.log(`Upgraded user ${userEmail} to dreamer tier`);
+          await base44.asServiceRole.entities.UserCredits.update(credits[0].id, { tier });
+          console.log(`Upgraded user ${userEmail} to ${tier} tier`);
         }
       }
     }
 
-    if (event.type === 'customer.subscription.deleted') {
+    if (event.type === 'customer.subscription.deleted' || event.type === 'customer.subscription.updated') {
       const subscription = event.data.object;
       // Find user by customer ID - fetch sessions to find email
       const sessions = await stripe.checkout.sessions.list({ customer: subscription.customer, limit: 1 });

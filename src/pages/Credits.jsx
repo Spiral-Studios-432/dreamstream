@@ -5,10 +5,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Sparkles, Moon, BookOpen, Flame, Gift, Star, Crown, Check, Zap } from 'lucide-react';
+import { Sparkles, Moon, BookOpen, Flame, Gift, Star, Crown, Check, Zap, Loader2 } from 'lucide-react';
 import CreditBadge from '../components/ui/CreditBadge';
-import UpgradeButton from '../components/ui/UpgradeButton';
 import { cn } from "@/lib/utils";
+
+const DREAMER_PRICE_ID = 'price_1TWDrsGPm4SaQNfNwkHVxzWG';
+const VISIONARY_PRICE_ID = 'price_1TWESDGPm4SaQNfNoGITn8lJ';
 
 const tiers = [
   {
@@ -17,22 +19,23 @@ const tiers = [
     price: '$0',
     color: 'from-slate-500 to-slate-600',
     features: [
+      '9 dreams (lifetime)',
       '9 AI interpretations (lifetime)',
       'Basic mood tracking',
       'Daily reflections',
-      'Standard support',
     ],
   },
   {
     name: 'Dreamer',
     value: 'dreamer',
     price: '$1.99/mo',
+    priceId: DREAMER_PRICE_ID,
     color: 'from-indigo-500 to-purple-500',
     popular: true,
     features: [
+      'Unlimited dream logging',
       'Unlimited AI interpretations',
       'Advanced analytics',
-      'Pattern recognition',
       'Priority support',
       '2x credit earnings',
     ],
@@ -40,15 +43,15 @@ const tiers = [
   {
     name: 'Visionary',
     value: 'visionary',
-    price: 'Coming soon',
+    price: '$5.99/mo',
+    priceId: VISIONARY_PRICE_ID,
     color: 'from-amber-500 to-orange-500',
     features: [
       'Everything in Dreamer',
-      'Exclusive dream themes',
-      'Personal dream coach',
-      '24/7 priority support',
+      'AI Dream Map & Trend Pictures',
+      'Illustrated picture book stories',
+      'Pattern recognition across dreams',
       '3x credit earnings',
-      'Early feature access',
     ],
   },
 ];
@@ -62,7 +65,28 @@ const earnMethods = [
 
 export default function Credits() {
   const [user, setUser] = useState(null);
+  const [loadingTier, setLoadingTier] = useState(null);
   const upgraded = new URLSearchParams(window.location.search).get('upgraded') === 'true';
+
+  const handleUpgrade = async (priceId, tierName) => {
+    if (window.self !== window.top) {
+      alert('Checkout is only available from the published app, not the preview.');
+      return;
+    }
+    setLoadingTier(tierName);
+    try {
+      const res = await base44.functions.invoke('createCheckoutSession', {
+        price_id: priceId,
+        success_url: window.location.origin + '/Credits?upgraded=true',
+        cancel_url: window.location.href,
+      });
+      if (res.data?.url) window.location.href = res.data.url;
+    } catch (err) {
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setLoadingTier(null);
+    }
+  };
 
   useEffect(() => {
     base44.auth.me().then(setUser);
@@ -196,10 +220,18 @@ export default function Credits() {
                       <Button className="w-full bg-slate-200 text-slate-600 cursor-default" disabled>
                         Current Plan
                       </Button>
-                    ) : tier.value === 'dreamer' ? (
-                      <UpgradeButton className="w-full" />
                     ) : tier.value === 'free' ? (
-                      <Button className="w-full" variant="outline" disabled>Downgrade</Button>
+                      <Button className="w-full" variant="outline" disabled>Current or Downgrade</Button>
+                    ) : tier.priceId ? (
+                      <Button
+                        onClick={() => handleUpgrade(tier.priceId, tier.value)}
+                        disabled={!!loadingTier}
+                        className={cn("w-full text-white font-semibold bg-gradient-to-r", tier.color)}
+                      >
+                        {loadingTier === tier.value
+                          ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Redirecting...</>
+                          : `Upgrade — ${tier.price}`}
+                      </Button>
                     ) : (
                       <Button className="w-full" variant="outline" disabled>Coming Soon</Button>
                     )}

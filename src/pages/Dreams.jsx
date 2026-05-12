@@ -4,10 +4,13 @@ import { base44 } from '@/api/base44Client';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Moon, Plus, Search, Filter, X } from 'lucide-react';
+import { Moon, Plus, Search, Filter, X, Lock } from 'lucide-react';
 import DreamForm from '../components/dreams/DreamForm';
 import DreamCard from '../components/dreams/DreamCard';
+import UpgradePrompt from '../components/ui/UpgradePrompt';
 import { AnimatePresence, motion } from 'framer-motion';
+
+const FREE_DREAM_LIMIT = 9;
 
 export default function Dreams() {
   const [showForm, setShowForm] = useState(false);
@@ -16,6 +19,7 @@ export default function Dreams() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [user, setUser] = useState(null);
+  const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -90,6 +94,18 @@ export default function Dreams() {
     setShowForm(true);
   };
 
+  const isFree = !userCredits || userCredits.tier === 'free';
+  const atFreeLimit = isFree && dreams.length >= FREE_DREAM_LIMIT;
+
+  const handleNewDream = () => {
+    if (atFreeLimit) {
+      setShowUpgradePrompt(true);
+      return;
+    }
+    setEditDream(null);
+    setShowForm(true);
+  };
+
   return (
     <div className="min-h-screen bg-[#03020a]">
       <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
@@ -114,11 +130,16 @@ export default function Dreams() {
           </div>
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Button 
-              onClick={() => { setEditDream(null); setShowForm(true); }}
+              onClick={handleNewDream}
               className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 shadow-xl shadow-indigo-200/50 text-sm sm:text-base rounded-xl font-semibold"
             >
-              <Plus className="w-5 h-5 mr-2" /> Log Dream
+              {atFreeLimit ? <><Lock className="w-5 h-5 mr-2" /> Upgrade to Log More</> : <><Plus className="w-5 h-5 mr-2" /> Log Dream</>}
             </Button>
+            {isFree && (
+              <p className="text-xs text-slate-400 mt-1 text-center sm:text-left">
+                {dreams.length}/9 free dreams used
+              </p>
+            )}
           </motion.div>
         </motion.div>
 
@@ -157,6 +178,11 @@ export default function Dreams() {
             </SelectContent>
           </Select>
         </div>
+
+        {/* Upgrade Prompt */}
+        {showUpgradePrompt && (
+          <UpgradePrompt reason="dreams" onClose={() => setShowUpgradePrompt(false)} />
+        )}
 
         {/* Dream Form Modal */}
         <AnimatePresence>
