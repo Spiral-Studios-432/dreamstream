@@ -10,7 +10,6 @@ import CreditBadge from '../components/ui/CreditBadge';
 import { cn } from "@/lib/utils";
 
 const DREAMER_PRICE_ID = 'price_1TeJ65CvDIwV5Je4onL6qnP7';
-const VISIONARY_PRICE_ID = 'price_1TeJ65CvDIwV5Je4AVriJ3nd';
 
 const tiers = [
   {
@@ -38,20 +37,6 @@ const tiers = [
       'Advanced analytics',
       'Priority support',
       '2x credit earnings',
-    ],
-  },
-  {
-    name: 'Visionary',
-    value: 'visionary',
-    price: '$9.99/mo',
-    priceId: VISIONARY_PRICE_ID,
-    color: 'from-amber-500 to-orange-500',
-    features: [
-      'Everything in Dreamer',
-      'AI Dream Map & Trend Pictures',
-      'Illustrated picture book stories',
-      'Pattern recognition across dreams',
-      '3x credit earnings',
     ],
   },
 ];

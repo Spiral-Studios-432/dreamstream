@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
-import { Sparkles, Loader2, Crown, Star, Moon } from 'lucide-react';
+import { Sparkles, Loader2, Star, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const DREAMER_PRICE_ID = 'price_1TeJ65CvDIwV5Je4onL6qnP7';
-const VISIONARY_PRICE_ID = 'price_1TeJ65CvDIwV5Je4AVriJ3nd';
 
 export default function UpgradePrompt({ reason = 'dreams', onClose }) {
   const [loading, setLoading] = useState(null);
@@ -73,30 +72,6 @@ export default function UpgradePrompt({ reason = 'dreams', onClose }) {
               {loading === 'dreamer'
                 ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Redirecting...</>
                 : 'Upgrade to Dreamer'}
-            </Button>
-          </div>
-
-          {/* Visionary */}
-          <div className="border-2 border-amber-400 rounded-xl p-4 bg-amber-50">
-            <div className="flex items-center gap-2 mb-2">
-              <Crown className="w-5 h-5 text-amber-500" />
-              <span className="font-bold text-slate-800">Visionary</span>
-              <span className="ml-auto font-bold text-amber-600">$9.99/mo</span>
-            </div>
-            <ul className="text-sm text-slate-600 space-y-1 mb-3">
-              <li>✓ Everything in Dreamer</li>
-              <li>✓ AI Dream Map & Trend Pictures</li>
-              <li>✓ Illustrated picture book stories</li>
-              <li>✓ Pattern recognition across dreams</li>
-            </ul>
-            <Button
-              onClick={() => handleUpgrade(VISIONARY_PRICE_ID, 'visionary')}
-              disabled={!!loading}
-              className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold"
-            >
-              {loading === 'visionary'
-                ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Redirecting...</>
-                : 'Upgrade to Visionary'}
             </Button>
           </div>
 
