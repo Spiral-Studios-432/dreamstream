@@ -9,8 +9,8 @@ import { Sparkles, Moon, BookOpen, Flame, Gift, Star, Crown, Check, Zap, Loader2
 import CreditBadge from '../components/ui/CreditBadge';
 import { cn } from "@/lib/utils";
 
-const DREAMER_PRICE_ID = 'price_1TWDrsGPm4SaQNfNwkHVxzWG';
-const VISIONARY_PRICE_ID = 'price_1TWESDGPm4SaQNfNoGITn8lJ';
+const DREAMER_PRICE_ID = 'price_1TeJ65CvDIwV5Je4onL6qnP7';
+const VISIONARY_PRICE_ID = 'price_1TeJ65CvDIwV5Je4AVriJ3nd';
 
 const tiers = [
   {
@@ -28,7 +28,7 @@ const tiers = [
   {
     name: 'Dreamer',
     value: 'dreamer',
-    price: '$1.99/mo',
+    price: '$4.99/mo',
     priceId: DREAMER_PRICE_ID,
     color: 'from-indigo-500 to-purple-500',
     popular: true,
@@ -43,7 +43,7 @@ const tiers = [
   {
     name: 'Visionary',
     value: 'visionary',
-    price: '$5.99/mo',
+    price: '$9.99/mo',
     priceId: VISIONARY_PRICE_ID,
     color: 'from-amber-500 to-orange-500',
     features: [

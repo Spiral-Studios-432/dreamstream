@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Sparkles, Loader2, Crown, Star, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const DREAMER_PRICE_ID = 'price_1TWDrsGPm4SaQNfNwkHVxzWG';
-const VISIONARY_PRICE_ID = 'price_1TWESDGPm4SaQNfNoGITn8lJ';
+const DREAMER_PRICE_ID = 'price_1TeJ65CvDIwV5Je4onL6qnP7';
+const VISIONARY_PRICE_ID = 'price_1TeJ65CvDIwV5Je4AVriJ3nd';
 
 export default function UpgradePrompt({ reason = 'dreams', onClose }) {
   const [loading, setLoading] = useState(null);
@@ -58,7 +58,7 @@ export default function UpgradePrompt({ reason = 'dreams', onClose }) {
             <div className="flex items-center gap-2 mb-2">
               <Star className="w-5 h-5 text-indigo-500" />
               <span className="font-bold text-slate-800">Dreamer</span>
-              <span className="ml-auto font-bold text-indigo-600">$1.99/mo</span>
+              <span className="ml-auto font-bold text-indigo-600">$4.99/mo</span>
             </div>
             <ul className="text-sm text-slate-600 space-y-1 mb-3">
               <li>✓ Unlimited dream logging</li>
@@ -81,7 +81,7 @@ export default function UpgradePrompt({ reason = 'dreams', onClose }) {
             <div className="flex items-center gap-2 mb-2">
               <Crown className="w-5 h-5 text-amber-500" />
               <span className="font-bold text-slate-800">Visionary</span>
-              <span className="ml-auto font-bold text-amber-600">$5.99/mo</span>
+              <span className="ml-auto font-bold text-amber-600">$9.99/mo</span>
             </div>
             <ul className="text-sm text-slate-600 space-y-1 mb-3">
               <li>✓ Everything in Dreamer</li>
