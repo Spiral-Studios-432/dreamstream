@@ -1,12 +1,12 @@
 import Stripe from 'npm:stripe@14.21.0';
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
-const stripe = new Stripe(Deno.env.get('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'));
+const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY'));
 
 Deno.serve(async (req) => {
   const body = await req.text();
   const signature = req.headers.get('stripe-signature');
-  const webhookSecret = Deno.env.get('whsec_pcEwo1CgXo01A7x66BujWSxRJpFoayzH');
+  const webhookSecret = Deno.env.get('STRIPE_WEBHOOK_SECRET');
 
   let event;
   try {
