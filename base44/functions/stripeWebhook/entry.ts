@@ -28,7 +28,8 @@ Deno.serve(async (req) => {
         // Determine tier from price ID
         const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 1 });
         const priceId = lineItems.data[0]?.price?.id;
-        const tier = priceId === 'price_1TWESDGPm4SaQNfNoGITn8lJ' ? 'visionary' : 'dreamer';
+        const DREAMER_PRICE_ID = 'price_1TeJ65CvDIwV5Je4onL6qnP7';
+        const tier = priceId === DREAMER_PRICE_ID ? 'dreamer' : 'dreamer'; // Only Dreamer tier exists
 
         if (credits.length > 0) {
           await base44.asServiceRole.entities.UserCredits.update(credits[0].id, { tier });
