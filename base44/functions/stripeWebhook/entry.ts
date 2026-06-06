@@ -1,12 +1,12 @@
 import Stripe from 'npm:stripe@14.21.0';
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
-const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY'));
+const stripe = new Stripe(Deno.env.get('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'));
 
 Deno.serve(async (req) => {
   const body = await req.text();
   const signature = req.headers.get('stripe-signature');
-  const webhookSecret = Deno.env.get('STRIPE_WEBHOOK_SECRET');
+  const webhookSecret = Deno.env.get('whsec_pcEwo1CgXo01A7x66BujWSxRJpFoayzH');
 
   let event;
   try {
@@ -28,7 +28,7 @@ Deno.serve(async (req) => {
         // Determine tier from price ID
         const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 1 });
         const priceId = lineItems.data[0]?.price?.id;
-        const DREAMER_PRICE_ID = 'price_1TeJ65CvDIwV5Je4onL6qnP7';
+        const DREAMER_PRICE_ID = 'price_1TeJlBCvDIwV5Je4NpUavqs1';
         const tier = priceId === DREAMER_PRICE_ID ? 'dreamer' : 'dreamer'; // Only Dreamer tier exists
 
         if (credits.length > 0) {
