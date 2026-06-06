@@ -25,15 +25,10 @@ Deno.serve(async (req) => {
 
       if (userEmail) {
         const credits = await base44.asServiceRole.entities.UserCredits.filter({ user_email: userEmail });
-        // Determine tier from price ID
-        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 1 });
-        const priceId = lineItems.data[0]?.price?.id;
-        const DREAMER_PRICE_ID = 'price_1TeJlBCvDIwV5Je4NpUavqs1';
-        const tier = priceId === DREAMER_PRICE_ID ? 'dreamer' : 'dreamer'; // Only Dreamer tier exists
 
         if (credits.length > 0) {
-          await base44.asServiceRole.entities.UserCredits.update(credits[0].id, { tier });
-          console.log(`Upgraded user ${userEmail} to ${tier} tier`);
+          await base44.asServiceRole.entities.UserCredits.update(credits[0].id, { tier: 'dreamer' });
+          console.log(`Upgraded user ${userEmail} to dreamer tier`);
         }
       }
     }
