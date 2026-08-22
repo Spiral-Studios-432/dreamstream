@@ -1,12 +1,32 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
+import { secrets } from 'base44:runtime';
 
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
-    const user = await base44.auth.me();
-    if (!user || user.role !== 'admin') {
+    const expectedToken = secrets.get('REFLECTION_REMINDER_TOKEN');
+
+    let suppliedToken = req.headers.get('x-automation-token');
+    if (!suppliedToken) {
+      try {
+        const body = await req.json();
+        if (body && typeof body === 'object') suppliedToken = body.token;
+      } catch { /* no JSON body — continue */ }
+    }
+
+    const tokenOk = expectedToken && suppliedToken && suppliedToken === expectedToken;
+    let adminOk = false;
+    if (!tokenOk) {
+      try {
+        const user = await base44.auth.me();
+        adminOk = !!user && user.role === 'admin';
+      } catch { /* not authenticated — not an admin run */ }
+    }
+
+    if (!tokenOk && !adminOk) {
       return Response.json({ error: 'Forbidden' }, { status: 403 });
     }
+
     const today = new Date().toISOString().split('T')[0];
     const users = await base44.asServiceRole.entities.User.list();
     let sent = 0;
