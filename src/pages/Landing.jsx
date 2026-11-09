@@ -166,6 +166,7 @@ export default function Landing() {
                 border: 'border-indigo-500/20',
                 bg: 'bg-indigo-500/[0.06]',
                 gradient: 'from-indigo-400 to-violet-500',
+                image: 'https://media.base44.com/images/public/697b66862fd85f11b95ddb5f/268ee67b7_generated_image.png',
               },
               {
                 icon: Sparkles,
@@ -174,6 +175,7 @@ export default function Landing() {
                 border: 'border-violet-500/25',
                 bg: 'bg-violet-500/[0.08]',
                 gradient: 'from-violet-400 to-purple-500',
+                image: 'https://media.base44.com/images/public/697b66862fd85f11b95ddb5f/e36d8576a_generated_image.png',
                 featured: true,
               },
               {
@@ -183,6 +185,7 @@ export default function Landing() {
                 border: 'border-purple-500/20',
                 bg: 'bg-purple-500/[0.06]',
                 gradient: 'from-purple-400 to-pink-500',
+                image: 'https://media.base44.com/images/public/697b66862fd85f11b95ddb5f/a30ecfddd_generated_image.png',
               },
             ].map((feature, i) => (
               <motion.div
@@ -199,6 +202,15 @@ export default function Landing() {
                     Most Loved
                   </div>
                 )}
+                <div className="relative mb-5 -mx-1 overflow-hidden rounded-xl">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="w-full aspect-[16/10] object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0616]/80 via-transparent to-transparent" />
+                </div>
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-5 shadow-lg`}>
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
@@ -285,7 +297,8 @@ export default function Landing() {
           <div
             className="relative rounded-3xl overflow-hidden p-8 sm:p-16"
             style={{
-              background: 'linear-gradient(135deg, rgba(109,40,217,0.25) 0%, rgba(99,102,241,0.15) 50%, rgba(147,51,234,0.25) 100%)',
+              background:
+                'linear-gradient(135deg, rgba(28,14,58,0.92) 0%, rgba(16,9,34,0.82) 45%, rgba(46,18,80,0.90) 100%), url("https://media.base44.com/images/public/697b66862fd85f11b95ddb5f/82ad00ae4_generated_image.png") center/cover no-repeat',
               border: '1px solid rgba(167,139,250,0.2)',
               backdropFilter: 'blur(24px)',
             }}
