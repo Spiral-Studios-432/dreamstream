@@ -5,22 +5,8 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-const STARS = Array.from({ length: 90 }, (_, i) => ({
-  id: i,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  size: Math.random() * 2 + 0.5,
-  duration: Math.random() * 4 + 3,
-  delay: Math.random() * 5,
-}));
-
-const ORBS = [
-  { color: '#7c6af7', x: '10%', y: '20%', size: 480, blur: 140, opacity: 0.14 },
-  { color: '#a78bfa', x: '72%', y: '12%', size: 380, blur: 120, opacity: 0.12 },
-  { color: '#c084fc', x: '50%', y: '60%', size: 560, blur: 160, opacity: 0.10 },
-  { color: '#818cf8', x: '85%', y: '72%', size: 320, blur: 110, opacity: 0.11 },
-  { color: '#9d6fd4', x: '18%', y: '80%', size: 420, blur: 130, opacity: 0.10 },
-];
+const HERO_IMAGE =
+  'https://media.base44.com/images/public/697b66862fd85f11b95ddb5f/12f4de880_generated_image.png';
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -42,32 +28,17 @@ export default function Landing() {
     <div className="min-h-screen bg-[#06040f] overflow-hidden text-white">
 
       {/* ── BACKGROUND ── */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {ORBS.map((orb, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              left: orb.x, top: orb.y,
-              width: orb.size, height: orb.size,
-              background: orb.color,
-              filter: `blur(${orb.blur}px)`,
-              opacity: orb.opacity,
-              transform: 'translate(-50%, -50%)',
-            }}
-            animate={{ scale: [1, 1.12, 1], opacity: [orb.opacity, orb.opacity * 1.3, orb.opacity] }}
-            transition={{ duration: 12 + i * 3, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        ))}
-        {STARS.map((star) => (
-          <motion.div
-            key={star.id}
-            className="absolute rounded-full bg-white"
-            style={{ left: `${star.x}%`, top: `${star.y}%`, width: star.size, height: star.size }}
-            animate={{ opacity: [0.15, 0.8, 0.15] }}
-            transition={{ duration: star.duration, delay: star.delay, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        ))}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <motion.img
+          src={HERO_IMAGE}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+          animate={{ scale: [1, 1.06, 1] }}
+          transition={{ duration: 34, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <div className="absolute inset-0 bg-[#06040f]/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06040f]/85 via-[#06040f]/35 to-[#06040f]" />
       </div>
 
       {/* ── HERO ── */}
