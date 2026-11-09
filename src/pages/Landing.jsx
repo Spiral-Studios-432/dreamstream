@@ -248,13 +248,29 @@ export default function Landing() {
       <div className="relative z-10 py-16 sm:py-32 px-5">
         <div className="max-w-3xl mx-auto">
           <motion.div
-            className="text-center mb-14"
+            className="text-center mb-10"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <p className="text-violet-300/70 font-medium text-xs tracking-widest uppercase mb-3">How it works</p>
             <h2 className="text-2xl sm:text-4xl font-bold text-white/90">As easy as writing in a diary</h2>
+          </motion.div>
+
+          <motion.div
+            className="relative mb-8 overflow-hidden rounded-3xl border border-white/[0.08]"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <img
+              src="https://media.base44.com/images/public/697b66862fd85f11b95ddb5f/ee6987e60_generated_image.png"
+              alt="A path of soft light fading into midnight mist"
+              className="w-full h-36 sm:h-56 object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#06040f]/90 via-[#06040f]/20 to-transparent" />
           </motion.div>
 
           <div className="space-y-4">
